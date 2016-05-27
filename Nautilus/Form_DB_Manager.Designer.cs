@@ -30,10 +30,6 @@
         {
             this.tabConfiguracion = new System.Windows.Forms.TabControl();
             this.TabConfig = new System.Windows.Forms.TabPage();
-            this.listBases = new System.Windows.Forms.ListBox();
-            this.btnAbrirBase = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbDatabaseSelector = new System.Windows.Forms.ComboBox();
             this.btnGuardarConfig = new System.Windows.Forms.Button();
             this.btnCancelarConfig = new System.Windows.Forms.Button();
             this.btnUnlock = new System.Windows.Forms.Button();
@@ -47,9 +43,6 @@
             this.txtServer = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.TabTools = new System.Windows.Forms.TabPage();
-            this.btnActivarTools = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.cmbSelectDB = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listRestaurarData = new System.Windows.Forms.ListBox();
             this.progressBar3 = new System.Windows.Forms.ProgressBar();
@@ -71,6 +64,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.TabConfigMonitor = new System.Windows.Forms.TabPage();
+            this.SaveDBDialog = new System.Windows.Forms.SaveFileDialog();
             this.tabConfiguracion.SuspendLayout();
             this.TabConfig.SuspendLayout();
             this.TabTools.SuspendLayout();
@@ -88,13 +82,10 @@
             this.tabConfiguracion.SelectedIndex = 0;
             this.tabConfiguracion.Size = new System.Drawing.Size(936, 354);
             this.tabConfiguracion.TabIndex = 1;
+            this.tabConfiguracion.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabConfiguracion_Selected);
             // 
             // TabConfig
             // 
-            this.TabConfig.Controls.Add(this.listBases);
-            this.TabConfig.Controls.Add(this.btnAbrirBase);
-            this.TabConfig.Controls.Add(this.label1);
-            this.TabConfig.Controls.Add(this.cbDatabaseSelector);
             this.TabConfig.Controls.Add(this.btnGuardarConfig);
             this.TabConfig.Controls.Add(this.btnCancelarConfig);
             this.TabConfig.Controls.Add(this.btnUnlock);
@@ -115,54 +106,19 @@
             this.TabConfig.Text = "Configuracion";
             this.TabConfig.UseVisualStyleBackColor = true;
             // 
-            // listBases
-            // 
-            this.listBases.Enabled = false;
-            this.listBases.FormattingEnabled = true;
-            this.listBases.Location = new System.Drawing.Point(509, 46);
-            this.listBases.Name = "listBases";
-            this.listBases.Size = new System.Drawing.Size(394, 264);
-            this.listBases.TabIndex = 23;
-            this.listBases.TabStop = false;
-            // 
-            // btnAbrirBase
-            // 
-            this.btnAbrirBase.Location = new System.Drawing.Point(356, 4);
-            this.btnAbrirBase.Name = "btnAbrirBase";
-            this.btnAbrirBase.Size = new System.Drawing.Size(104, 23);
-            this.btnAbrirBase.TabIndex = 1;
-            this.btnAbrirBase.Text = "Abrir Configuracion";
-            this.btnAbrirBase.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 13);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Seleccionar Base de Datos";
-            // 
-            // cbDatabaseSelector
-            // 
-            this.cbDatabaseSelector.FormattingEnabled = true;
-            this.cbDatabaseSelector.Location = new System.Drawing.Point(149, 7);
-            this.cbDatabaseSelector.Name = "cbDatabaseSelector";
-            this.cbDatabaseSelector.Size = new System.Drawing.Size(201, 21);
-            this.cbDatabaseSelector.TabIndex = 0;
-            // 
             // btnGuardarConfig
             // 
-            this.btnGuardarConfig.Location = new System.Drawing.Point(385, 210);
+            this.btnGuardarConfig.Location = new System.Drawing.Point(389, 184);
             this.btnGuardarConfig.Name = "btnGuardarConfig";
             this.btnGuardarConfig.Size = new System.Drawing.Size(75, 23);
             this.btnGuardarConfig.TabIndex = 9;
             this.btnGuardarConfig.Text = "Guardar";
             this.btnGuardarConfig.UseVisualStyleBackColor = true;
+            this.btnGuardarConfig.Click += new System.EventHandler(this.btnGuardarConfig_Click);
             // 
             // btnCancelarConfig
             // 
-            this.btnCancelarConfig.Location = new System.Drawing.Point(304, 210);
+            this.btnCancelarConfig.Location = new System.Drawing.Point(308, 184);
             this.btnCancelarConfig.Name = "btnCancelarConfig";
             this.btnCancelarConfig.Size = new System.Drawing.Size(75, 23);
             this.btnCancelarConfig.TabIndex = 8;
@@ -171,7 +127,7 @@
             // 
             // btnUnlock
             // 
-            this.btnUnlock.Location = new System.Drawing.Point(85, 211);
+            this.btnUnlock.Location = new System.Drawing.Point(89, 185);
             this.btnUnlock.Name = "btnUnlock";
             this.btnUnlock.Size = new System.Drawing.Size(75, 23);
             this.btnUnlock.TabIndex = 7;
@@ -180,7 +136,7 @@
             // 
             // btnTestCon
             // 
-            this.btnTestCon.Location = new System.Drawing.Point(85, 181);
+            this.btnTestCon.Location = new System.Drawing.Point(89, 155);
             this.btnTestCon.Name = "btnTestCon";
             this.btnTestCon.Size = new System.Drawing.Size(375, 23);
             this.btnTestCon.TabIndex = 6;
@@ -190,7 +146,7 @@
             // 
             // txtBase
             // 
-            this.txtBase.Location = new System.Drawing.Point(85, 145);
+            this.txtBase.Location = new System.Drawing.Point(89, 119);
             this.txtBase.Name = "txtBase";
             this.txtBase.Size = new System.Drawing.Size(375, 20);
             this.txtBase.TabIndex = 5;
@@ -198,7 +154,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 148);
+            this.label5.Location = new System.Drawing.Point(10, 122);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 13);
             this.label5.TabIndex = 14;
@@ -206,7 +162,7 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(85, 112);
+            this.txtPassword.Location = new System.Drawing.Point(89, 86);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(375, 20);
             this.txtPassword.TabIndex = 4;
@@ -214,7 +170,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 115);
+            this.label6.Location = new System.Drawing.Point(10, 89);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(61, 13);
             this.label6.TabIndex = 12;
@@ -222,7 +178,7 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(85, 79);
+            this.txtUsuario.Location = new System.Drawing.Point(89, 53);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(375, 20);
             this.txtUsuario.TabIndex = 3;
@@ -230,7 +186,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 82);
+            this.label7.Location = new System.Drawing.Point(10, 56);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 10;
@@ -238,7 +194,7 @@
             // 
             // txtServer
             // 
-            this.txtServer.Location = new System.Drawing.Point(85, 46);
+            this.txtServer.Location = new System.Drawing.Point(89, 20);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(375, 20);
             this.txtServer.TabIndex = 2;
@@ -246,7 +202,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 49);
+            this.label8.Location = new System.Drawing.Point(10, 23);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(46, 13);
             this.label8.TabIndex = 8;
@@ -254,9 +210,6 @@
             // 
             // TabTools
             // 
-            this.TabTools.Controls.Add(this.btnActivarTools);
-            this.TabTools.Controls.Add(this.label14);
-            this.TabTools.Controls.Add(this.cmbSelectDB);
             this.TabTools.Controls.Add(this.panel2);
             this.TabTools.Controls.Add(this.panel1);
             this.TabTools.Location = new System.Drawing.Point(4, 22);
@@ -265,32 +218,6 @@
             this.TabTools.TabIndex = 2;
             this.TabTools.Text = "Herramientas";
             this.TabTools.UseVisualStyleBackColor = true;
-            // 
-            // btnActivarTools
-            // 
-            this.btnActivarTools.Location = new System.Drawing.Point(397, 7);
-            this.btnActivarTools.Name = "btnActivarTools";
-            this.btnActivarTools.Size = new System.Drawing.Size(132, 23);
-            this.btnActivarTools.TabIndex = 1;
-            this.btnActivarTools.Text = "Activar herramientas";
-            this.btnActivarTools.UseVisualStyleBackColor = true;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 12);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(134, 13);
-            this.label14.TabIndex = 4;
-            this.label14.Text = "Seleccionar Base de datos";
-            // 
-            // cmbSelectDB
-            // 
-            this.cmbSelectDB.FormattingEnabled = true;
-            this.cmbSelectDB.Location = new System.Drawing.Point(143, 9);
-            this.cmbSelectDB.Name = "cmbSelectDB";
-            this.cmbSelectDB.Size = new System.Drawing.Size(248, 21);
-            this.cmbSelectDB.TabIndex = 0;
             // 
             // panel2
             // 
@@ -342,9 +269,9 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(8, 207);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(127, 13);
+            this.label13.Size = new System.Drawing.Size(113, 13);
             this.label13.TabIndex = 6;
-            this.label13.Text = "Datos de la Restauracion";
+            this.label13.Text = "Datos de la Operacion";
             // 
             // btnRestaurarDB
             // 
@@ -372,6 +299,7 @@
             this.btnRepararDB.TabIndex = 6;
             this.btnRepararDB.Text = "Reparar Base de Datos";
             this.btnRepararDB.UseVisualStyleBackColor = true;
+            this.btnRepararDB.Click += new System.EventHandler(this.btnRepararDB_Click);
             // 
             // label12
             // 
@@ -421,6 +349,7 @@
             this.btnGuardarRespaldoBD.TabIndex = 5;
             this.btnGuardarRespaldoBD.Text = "Guardar";
             this.btnGuardarRespaldoBD.UseVisualStyleBackColor = true;
+            this.btnGuardarRespaldoBD.Click += new System.EventHandler(this.btnGuardarRespaldoBD_Click);
             // 
             // btnCancelarRespaldoDB
             // 
@@ -439,6 +368,7 @@
             this.btnSelectRuta.TabIndex = 3;
             this.btnSelectRuta.Text = "Seleccionar carpeta";
             this.btnSelectRuta.UseVisualStyleBackColor = true;
+            this.btnSelectRuta.Click += new System.EventHandler(this.btnSelectRuta_Click);
             // 
             // txtRutaDB
             // 
@@ -483,6 +413,10 @@
             this.TabConfigMonitor.Text = "Monitor";
             this.TabConfigMonitor.UseVisualStyleBackColor = true;
             // 
+            // SaveDBDialog
+            // 
+            this.SaveDBDialog.FileName = "Backup.SQL";
+            // 
             // Form_DB_Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,7 +430,6 @@
             this.TabConfig.ResumeLayout(false);
             this.TabConfig.PerformLayout();
             this.TabTools.ResumeLayout(false);
-            this.TabTools.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -509,10 +442,6 @@
 
         private System.Windows.Forms.TabControl tabConfiguracion;
         private System.Windows.Forms.TabPage TabConfig;
-        private System.Windows.Forms.ListBox listBases;
-        private System.Windows.Forms.Button btnAbrirBase;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbDatabaseSelector;
         private System.Windows.Forms.Button btnGuardarConfig;
         private System.Windows.Forms.Button btnCancelarConfig;
         private System.Windows.Forms.Button btnUnlock;
@@ -526,9 +455,6 @@
         private System.Windows.Forms.TextBox txtServer;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabPage TabTools;
-        private System.Windows.Forms.Button btnActivarTools;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox cmbSelectDB;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ListBox listRestaurarData;
         private System.Windows.Forms.ProgressBar progressBar3;
@@ -550,5 +476,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TabPage TabConfigMonitor;
+        private System.Windows.Forms.SaveFileDialog SaveDBDialog;
     }
 }

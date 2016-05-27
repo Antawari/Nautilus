@@ -21,6 +21,14 @@ namespace Nautilus
         {
 
         }
+        private void btnGuardarConfig_Click(object sender, EventArgs e)
+        {
+            //We need to fix the entries to check for acceptable values.
+            
+            
+            //Save Configuration
+            ConfigWriter();
+        }
 
         private void Form_DB_Manager_Load(object sender, EventArgs e)
         {
@@ -35,6 +43,67 @@ namespace Nautilus
             txtPassword.Text = ConfigManager.ReadConfigPassword();
             txtUsuario.Text = ConfigManager.ReadConfigUID();
             txtBase.Text = ConfigManager.ReadConfigDatabase();
+        }
+
+        //overwrites the App.Config file through the ConfigManager Class
+        private void ConfigWriter()
+        {
+            string value;
+            string key;
+
+            //Server Write
+            key = "SERVER";
+            value = txtServer.Text;
+            ConfigManager.writeConfig(key, value);
+
+            //password write
+            key = "PASSWORD";
+            value = txtPassword.Text;
+            ConfigManager.writeConfig(key, value);
+            
+            //User Write
+            key = "UID";
+            value = txtUsuario.Text;
+            ConfigManager.writeConfig(key, value);
+
+            //Database write
+            key = "DATABASE";
+            value = txtBase.Text;
+            ConfigManager.writeConfig(key, value);
+
+        }
+
+        private void tabConfiguracion_Selected(object sender, TabControlEventArgs e)
+        {
+            FillTools();
+            
+
+        }
+
+        private void FillTools()
+        {
+            listDBData.Items.Clear();
+            listDBData.Items.Add("Servidor= " + ConfigManager.ReadConfigServer());
+            listDBData.Items.Add("Base de Datos= " + ConfigManager.ReadConfigDatabase());
+            listDBData.Items.Add("UID= " + ConfigManager.ReadConfigUID());
+        }
+
+        private void btnSelectRuta_Click(object sender, EventArgs e)
+        {
+            SaveDBDialog.ShowDialog();
+            txtRutaDB.Text = SaveDBDialog.FileName;
+        }
+
+        private void btnGuardarRespaldoBD_Click(object sender, EventArgs e)
+        {
+            string ruta;
+            ruta = txtRutaDB.Text;
+            DBManager.backupSQL(ruta);
+        }
+
+        private void btnRepararDB_Click(object sender, EventArgs e)
+        {
+            DBManager.RepairDB();
         }
     }
 }

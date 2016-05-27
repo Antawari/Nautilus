@@ -31,7 +31,7 @@ namespace Nautilus
 
             //Se asigna el inicio de conexion
             //los datos de cadena de conexion son extraidos de el archivo de configuraccion del sistema
-            string cadenaConeccion = ConfigurationManager.AppSettings["ConnectionString"];
+            string cadenaConeccion = ConfigManager.ConnString();
 
             _conn = new MySqlConnection(cadenaConeccion);
 
@@ -264,6 +264,7 @@ namespace Nautilus
             {
                 MessageBox.Show("Hubo un problema con la eliminacion");
             }
+            Desconectarse();
         }
 
 
@@ -278,7 +279,66 @@ namespace Nautilus
             return valor;
         }
 
+        //to backup the database
+
+        public static void backupSQL(string ruta)
+        {
+            //Start Variables
+            Iniciador();
+
+            //Connector and routine
+            if (Conectarse() == true)
+            {
+                //Backup Execution
+                using (MySqlCommand command = new MySqlCommand())
+                {
+                    using (MySqlBackup backup = new MySqlBackup(command))
+                    { 
+                        command.Connection = _conn;
+                        backup.ExportToFile(ruta);
+                        
+                        Desconectarse();
+                        MessageBox.Show("Actualizado con exito");
+                    }
+                }
+            }
+
+            else
+            {
+                MessageBox.Show("Hubo un problema con la Conexion");
+            }
+        }
 
 
+        //Repair DB function
+        public static void RepairDB(string query)
+        {
+            //Initiate Variables and conection
+            Iniciador();
+            Conectarse();
+            
+            //Components necessary for the function
+            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
+            MySqlDataAdapter ad = new MySqlDataAdapter(query, _conn);
+            ad.Fill(dt);
+            //Loop that executes repair table by table
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                RepairTable("repair table " + dt.Rows[i][0].ToString() + "");
+            }
+            Desconectarse();
+        }
+
+        public static  void RepairTable(string query)
+        {
+            //Method executed in the RepairDB loop
+            MySqlCommand cmd = new MySqlCommand();
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            cmd = _conn.CreateCommand();
+            cmd.CommandText = query;
+            cmd.ExecuteNonQuery();
+        }
     }
 }
