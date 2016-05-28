@@ -44,11 +44,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.TabTools = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.listRestaurarData = new System.Windows.Forms.ListBox();
-            this.progressBar3 = new System.Windows.Forms.ProgressBar();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label13 = new System.Windows.Forms.Label();
             this.btnRestaurarDB = new System.Windows.Forms.Button();
             this.btnOptimizarDB = new System.Windows.Forms.Button();
             this.btnRepararDB = new System.Windows.Forms.Button();
@@ -65,6 +60,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.TabConfigMonitor = new System.Windows.Forms.TabPage();
             this.SaveDBDialog = new System.Windows.Forms.SaveFileDialog();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtRestoreRuta = new System.Windows.Forms.TextBox();
+            this.btnRestaurarRuta = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.openRestoreDialog = new System.Windows.Forms.OpenFileDialog();
+            this.listDBHealth = new System.Windows.Forms.ListBox();
             this.tabConfiguracion.SuspendLayout();
             this.TabConfig.SuspendLayout();
             this.TabTools.SuspendLayout();
@@ -221,70 +222,33 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.listRestaurarData);
-            this.panel2.Controls.Add(this.progressBar3);
-            this.panel2.Controls.Add(this.progressBar2);
-            this.panel2.Controls.Add(this.progressBar1);
-            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.listDBHealth);
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.btnRestaurarRuta);
+            this.panel2.Controls.Add(this.txtRestoreRuta);
+            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.btnRestaurarDB);
             this.panel2.Controls.Add(this.btnOptimizarDB);
             this.panel2.Controls.Add(this.btnRepararDB);
             this.panel2.Controls.Add(this.label12);
-            this.panel2.Location = new System.Drawing.Point(527, 39);
+            this.panel2.Location = new System.Drawing.Point(527, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(396, 282);
+            this.panel2.Size = new System.Drawing.Size(396, 318);
             this.panel2.TabIndex = 2;
-            // 
-            // listRestaurarData
-            // 
-            this.listRestaurarData.FormattingEnabled = true;
-            this.listRestaurarData.Location = new System.Drawing.Point(148, 134);
-            this.listRestaurarData.Name = "listRestaurarData";
-            this.listRestaurarData.Size = new System.Drawing.Size(238, 134);
-            this.listRestaurarData.TabIndex = 11;
-            // 
-            // progressBar3
-            // 
-            this.progressBar3.Location = new System.Drawing.Point(148, 26);
-            this.progressBar3.Name = "progressBar3";
-            this.progressBar3.Size = new System.Drawing.Size(238, 23);
-            this.progressBar3.TabIndex = 9;
-            // 
-            // progressBar2
-            // 
-            this.progressBar2.Location = new System.Drawing.Point(148, 64);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(238, 23);
-            this.progressBar2.TabIndex = 8;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(148, 105);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(238, 23);
-            this.progressBar1.TabIndex = 7;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 207);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(113, 13);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Datos de la Operacion";
             // 
             // btnRestaurarDB
             // 
-            this.btnRestaurarDB.Location = new System.Drawing.Point(6, 106);
+            this.btnRestaurarDB.Location = new System.Drawing.Point(261, 293);
             this.btnRestaurarDB.Name = "btnRestaurarDB";
             this.btnRestaurarDB.Size = new System.Drawing.Size(135, 23);
             this.btnRestaurarDB.TabIndex = 8;
-            this.btnRestaurarDB.Text = "Restaurar Base de Datos";
+            this.btnRestaurarDB.Text = "Restaurar";
             this.btnRestaurarDB.UseVisualStyleBackColor = true;
+            this.btnRestaurarDB.Click += new System.EventHandler(this.btnRestaurarDB_Click);
             // 
             // btnOptimizarDB
             // 
-            this.btnOptimizarDB.Location = new System.Drawing.Point(6, 65);
+            this.btnOptimizarDB.Location = new System.Drawing.Point(259, 200);
             this.btnOptimizarDB.Name = "btnOptimizarDB";
             this.btnOptimizarDB.Size = new System.Drawing.Size(135, 23);
             this.btnOptimizarDB.TabIndex = 7;
@@ -293,7 +257,7 @@
             // 
             // btnRepararDB
             // 
-            this.btnRepararDB.Location = new System.Drawing.Point(6, 27);
+            this.btnRepararDB.Location = new System.Drawing.Point(258, 109);
             this.btnRepararDB.Name = "btnRepararDB";
             this.btnRepararDB.Size = new System.Drawing.Size(135, 23);
             this.btnRepararDB.TabIndex = 6;
@@ -321,9 +285,9 @@
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Location = new System.Drawing.Point(3, 39);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(526, 282);
+            this.panel1.Size = new System.Drawing.Size(526, 318);
             this.panel1.TabIndex = 1;
             // 
             // progressBar4
@@ -417,6 +381,53 @@
             // 
             this.SaveDBDialog.FileName = "Backup.SQL";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 205);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(151, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Base de datos Optimizada: OK";
+            // 
+            // txtRestoreRuta
+            // 
+            this.txtRestoreRuta.Location = new System.Drawing.Point(24, 267);
+            this.txtRestoreRuta.Name = "txtRestoreRuta";
+            this.txtRestoreRuta.Size = new System.Drawing.Size(233, 20);
+            this.txtRestoreRuta.TabIndex = 14;
+            // 
+            // btnRestaurarRuta
+            // 
+            this.btnRestaurarRuta.Location = new System.Drawing.Point(263, 264);
+            this.btnRestaurarRuta.Name = "btnRestaurarRuta";
+            this.btnRestaurarRuta.Size = new System.Drawing.Size(133, 23);
+            this.btnRestaurarRuta.TabIndex = 15;
+            this.btnRestaurarRuta.Text = "Abrir Respaldo";
+            this.btnRestaurarRuta.UseVisualStyleBackColor = true;
+            this.btnRestaurarRuta.Click += new System.EventHandler(this.btnRestaurarRuta_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(182, 293);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "Cancelar";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // openRestoreDialog
+            // 
+            this.openRestoreDialog.FileName = "openFileDialog1";
+            // 
+            // listDBHealth
+            // 
+            this.listDBHealth.FormattingEnabled = true;
+            this.listDBHealth.Location = new System.Drawing.Point(8, 33);
+            this.listDBHealth.Name = "listDBHealth";
+            this.listDBHealth.Size = new System.Drawing.Size(237, 160);
+            this.listDBHealth.TabIndex = 17;
+            // 
             // Form_DB_Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -456,11 +467,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabPage TabTools;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ListBox listRestaurarData;
-        private System.Windows.Forms.ProgressBar progressBar3;
-        private System.Windows.Forms.ProgressBar progressBar2;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnRestaurarDB;
         private System.Windows.Forms.Button btnOptimizarDB;
         private System.Windows.Forms.Button btnRepararDB;
@@ -477,5 +483,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TabPage TabConfigMonitor;
         private System.Windows.Forms.SaveFileDialog SaveDBDialog;
+        private System.Windows.Forms.Button btnRestaurarRuta;
+        private System.Windows.Forms.TextBox txtRestoreRuta;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.OpenFileDialog openRestoreDialog;
+        private System.Windows.Forms.ListBox listDBHealth;
     }
 }

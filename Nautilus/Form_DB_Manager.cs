@@ -76,6 +76,7 @@ namespace Nautilus
         private void tabConfiguracion_Selected(object sender, TabControlEventArgs e)
         {
             FillTools();
+
             
 
         }
@@ -86,6 +87,10 @@ namespace Nautilus
             listDBData.Items.Add("Servidor= " + ConfigManager.ReadConfigServer());
             listDBData.Items.Add("Base de Datos= " + ConfigManager.ReadConfigDatabase());
             listDBData.Items.Add("UID= " + ConfigManager.ReadConfigUID());
+
+            //Function that retrieves the OK status for all tables
+            listDBHealth.DataSource = DBManager.HealthDB();
+
         }
 
         private void btnSelectRuta_Click(object sender, EventArgs e)
@@ -103,7 +108,19 @@ namespace Nautilus
 
         private void btnRepararDB_Click(object sender, EventArgs e)
         {
-            DBManager.RepairDB();
+            DBManager.RepairDB("SHOW TABLES IN nautilus");
+        }
+
+        private void btnRestaurarRuta_Click(object sender, EventArgs e)
+        {
+            openRestoreDialog.ShowDialog();
+            txtRestoreRuta.Text = openRestoreDialog.FileName.ToString();
+
+        }
+
+        private void btnRestaurarDB_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

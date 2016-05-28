@@ -340,5 +340,77 @@ namespace Nautilus
             cmd.CommandText = query;
             cmd.ExecuteNonQuery();
         }
+
+        /* Important Function.
+         * Review for upcoming updates
+         */
+
+        //List that returns the overall health state of the tables in the current Database
+        public static List<string> HealthDB()
+        {
+            //Object declaration and allocation
+            string tabla = null;
+            string query2 = null;
+            MySqlCommand cmd = new MySqlCommand();
+            List<string> statusList = new List<string>();
+            MySqlDataReader lectorDatos = null ;
+            Iniciador();
+            //Abrir conexion y ejecutar sentencia
+            if (Conectarse() == true)
+            {
+                //Components necessary for the function
+                DataTable dt = new DataTable();
+                DataSet ds = new DataSet();
+                MySqlDataAdapter ad = new MySqlDataAdapter("SHOW TABLES IN nautilus", _conn);
+                ad.Fill(dt);
+                //Loop that executes repair table by table
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+
+                    tabla = dt.Rows[i][0].ToString();
+                    query2 = "CHECK TABLE " + tabla + "";
+                    //create the command
+                    cmd = _conn.CreateCommand();
+                    cmd.CommandText = query2;
+
+
+                    //create a reader and execute the command
+                    lectorDatos = cmd.ExecuteReader();
+                    lectorDatos.Read();
+                    //add items to the list
+                    statusList.Add("TABLA:" + tabla + " = " + lectorDatos["Msg_text"]);
+                    //Close the data reader for a new query
+                    lectorDatos.Close();
+
+                   
+
+                    
+                }
+                //disconnect and return the list
+                Desconectarse();
+                return statusList;
+            }
+            //disconnect, nullify the list and return the null parameter
+            Desconectarse();
+            statusList = null;
+                return statusList;
+       }
+
+        /* End of health function
+         * 
+         * 
+         * 
+         */
+             
+
+         
+
+             
+                
+
+        
+
+
     }
 }
