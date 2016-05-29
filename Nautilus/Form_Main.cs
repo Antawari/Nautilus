@@ -23,5 +23,12 @@ namespace Nautilus
             DataBaseForm.MdiParent = this;
             DataBaseForm.Show();
         }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUserManagement userform = new frmUserManagement();
+            userform.MdiParent = this;
+            userform.Show();
+        }
     }
 }
