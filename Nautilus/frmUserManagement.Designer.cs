@@ -62,6 +62,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabModificarUsuario = new System.Windows.Forms.TabPage();
             this.gpMU = new System.Windows.Forms.GroupBox();
+            this.btnMUUsuario = new System.Windows.Forms.Button();
             this.txtMUPassword = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.txtMUUsuario = new System.Windows.Forms.TextBox();
@@ -72,7 +73,6 @@
             this.btnMUBuscar = new System.Windows.Forms.Button();
             this.txtMUBuscar = new System.Windows.Forms.TextBox();
             this.btnMUCancelar = new System.Windows.Forms.Button();
-            this.btnMUGuardar = new System.Windows.Forms.Button();
             this.chkMUInactivo = new System.Windows.Forms.CheckBox();
             this.chkMUActivo = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -197,6 +197,7 @@
             this.btnNUGuardar.TabIndex = 16;
             this.btnNUGuardar.Text = "Guardar";
             this.btnNUGuardar.UseVisualStyleBackColor = true;
+            this.btnNUGuardar.Click += new System.EventHandler(this.btnNUGuardar_Click_1);
             // 
             // cmbNURol
             // 
@@ -257,6 +258,7 @@
             this.txtNUMail.Name = "txtNUMail";
             this.txtNUMail.Size = new System.Drawing.Size(350, 20);
             this.txtNUMail.TabIndex = 11;
+            this.txtNUMail.TextChanged += new System.EventHandler(this.txtNUMail_TextChanged);
             // 
             // label9
             // 
@@ -430,9 +432,12 @@
             this.tabModificarUsuario.TabIndex = 1;
             this.tabModificarUsuario.Text = "ModificarUsuario";
             this.tabModificarUsuario.UseVisualStyleBackColor = true;
+            this.tabModificarUsuario.Click += new System.EventHandler(this.tabModificarUsuario_Enter);
+            this.tabModificarUsuario.Enter += new System.EventHandler(this.tabModificarUsuario_Enter);
             // 
             // gpMU
             // 
+            this.gpMU.Controls.Add(this.btnMUUsuario);
             this.gpMU.Controls.Add(this.txtMUPassword);
             this.gpMU.Controls.Add(this.label28);
             this.gpMU.Controls.Add(this.txtMUUsuario);
@@ -443,7 +448,6 @@
             this.gpMU.Controls.Add(this.btnMUBuscar);
             this.gpMU.Controls.Add(this.txtMUBuscar);
             this.gpMU.Controls.Add(this.btnMUCancelar);
-            this.gpMU.Controls.Add(this.btnMUGuardar);
             this.gpMU.Controls.Add(this.chkMUInactivo);
             this.gpMU.Controls.Add(this.chkMUActivo);
             this.gpMU.Controls.Add(this.label12);
@@ -470,6 +474,15 @@
             this.gpMU.Size = new System.Drawing.Size(457, 575);
             this.gpMU.TabIndex = 0;
             this.gpMU.TabStop = false;
+            // 
+            // btnMUUsuario
+            // 
+            this.btnMUUsuario.Location = new System.Drawing.Point(369, 545);
+            this.btnMUUsuario.Name = "btnMUUsuario";
+            this.btnMUUsuario.Size = new System.Drawing.Size(75, 23);
+            this.btnMUUsuario.TabIndex = 87;
+            this.btnMUUsuario.Text = "Guardar";
+            this.btnMUUsuario.UseVisualStyleBackColor = true;
             // 
             // txtMUPassword
             // 
@@ -513,6 +526,7 @@
             this.lstMUSeleccionU.ReadOnly = true;
             this.lstMUSeleccionU.Size = new System.Drawing.Size(436, 110);
             this.lstMUSeleccionU.TabIndex = 19;
+            this.lstMUSeleccionU.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lstMUSeleccionU_CellMouseClick);
             // 
             // cmbMURol
             // 
@@ -555,15 +569,7 @@
             this.btnMUCancelar.TabIndex = 33;
             this.btnMUCancelar.Text = "Cancelar";
             this.btnMUCancelar.UseVisualStyleBackColor = true;
-            // 
-            // btnMUGuardar
-            // 
-            this.btnMUGuardar.Location = new System.Drawing.Point(368, 545);
-            this.btnMUGuardar.Name = "btnMUGuardar";
-            this.btnMUGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnMUGuardar.TabIndex = 34;
-            this.btnMUGuardar.Text = "Guardar";
-            this.btnMUGuardar.UseVisualStyleBackColor = true;
+            this.btnMUCancelar.Click += new System.EventHandler(this.btnNUCancelar_Click);
             // 
             // chkMUInactivo
             // 
@@ -755,6 +761,7 @@
             this.tabEliminarUsuario.TabIndex = 2;
             this.tabEliminarUsuario.Text = "Eliminar Usuario";
             this.tabEliminarUsuario.UseVisualStyleBackColor = true;
+            this.tabEliminarUsuario.Enter += new System.EventHandler(this.tabEliminarUsuario_Enter);
             // 
             // lblEUSelected
             // 
@@ -771,6 +778,7 @@
             this.lstEUlista.Name = "lstEUlista";
             this.lstEUlista.Size = new System.Drawing.Size(437, 363);
             this.lstEUlista.TabIndex = 59;
+            this.lstEUlista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lstEUlista_CellContentClick);
             // 
             // btnEUCancelar
             // 
@@ -886,7 +894,7 @@
         private System.Windows.Forms.Button btnMUBuscar;
         private System.Windows.Forms.TextBox txtMUBuscar;
         private System.Windows.Forms.Button btnMUCancelar;
-        private System.Windows.Forms.Button btnMUGuardar;
+        
         private System.Windows.Forms.CheckBox chkMUInactivo;
         private System.Windows.Forms.CheckBox chkMUActivo;
         private System.Windows.Forms.Label label12;
@@ -916,5 +924,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button btnEUBuscar;
         private System.Windows.Forms.TextBox txtEUBuscarU;
+        private System.Windows.Forms.Button btnMUUsuario;
     }
 }

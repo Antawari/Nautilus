@@ -57,55 +57,14 @@ namespace Nautilus
         {
             //Rutina que carga la consulta select en la base de datos y
             //extrae los datos de todos los usuarios para popular la lista
+            // Construir el select inicial para llenar el grid
+            string query = @"SELECT idusuarios as 'ID',Nombre,ApellidoP as 'Apellido Paterno', ApellidoM as 'Apellido Materno' from usuarios order by Nombre; ";
 
-        }
-        private void btnNUGuardar_Click(object sender, EventArgs e)
-        {
-            //Variables para la construccion de la sentencia
-            //UserID,Password,Nombre,ApellidoP,ApellidoM,Direccion1,Direccion2,Telefono1,Telefono2,Mail,Status,Rol
-            string userID;
-            string password;
-            string Nombre;
-            string ApellidoP;
-            string ApellidoM;
-            string Direccion1;
-            string Direccion2;
-            string Telefono1;
-            string Telefono2;
-            string mail;
+            /////Revisar el codigo Lista
 
-            string rol;
-
-            string query;
-
-            //Constructor de sentencia
-            //llenado de variables
-            userID = txtNUUsuario.Text;
-            password = txtNUPassword.Text;
-            Nombre = txtNUNombre.Text;
-            ApellidoP = txtNUApellidoP.Text;
-            ApellidoM = txtNUApellidoM.Text;
-            Direccion1 = txtNUDireccion1.Text;
-            Direccion2 = txtNUDireccion2.Text;
-            Telefono1 = txtNUTelefono1.Text;
-            Telefono2 = txtNUTelefono2.Text;
-            mail = txtNUMail.Text;
-
-            //Asigancion del la variable status
-            StatusSelector();
-
-            rol = cmbMURol.Text;
-
-            //construccion enorme del string
-            query = @"INSERT INTO usuarios (UserID,Password,Nombre,ApellidoP,ApellidoM,Direccion1,Direccion2," +
-"Telefono1,Telefono2,Mail,Status,rol) " +
-"VALUES " +
-"('" + userID + "','" + password + "','" + Nombre + "','" + ApellidoP + "','" + ApellidoM + "','" + Direccion1 + "','"
-+ Direccion2 + "','" + Telefono1 + "','" + Telefono2 + "','" + mail + "','" + Status + "','" + rol + "');";
-
-
-            //MessageBox.Show(query);
-            DBManager.Insertar(query);
+            lstMUSeleccionU.DataSource = null;
+            lstMUSeleccionU.DataSource = DBManager.SelectForGrid(query);
+            lstMUSeleccionU.Columns[0].Visible = false;
 
         }
 
@@ -246,42 +205,7 @@ namespace Nautilus
         }
 
 
-        //Boton que actualiza
-        private void btnMUGuardar_Click(object sender, EventArgs e)
-        {
-            //declaracion y llenado de variables
-            string _table = "usuarios"; //Esta tabla es estatica para la rutina
-
-            //Llenado de la variable _values
-            string[,,] _values =
-           {
-                { { "UserID", txtMUUsuario.Text, "string" } },
-                { { "Password", txtMUPassword.Text,"string" } },
-                { {"Nombre",txtMUNombre.Text ,"string"} },
-                { {"ApellidoP",txtMUApellidoP.Text ,"string" } },
-                { {"ApellidoM",txtMUApellidoM.Text ,"string" } },
-                { {"Direccion1",txtMUDireccion.Text,"string" } },
-                { {"Direccion2",txtMUDireccion2.Text,"string" } },
-                { {"Telefono1",txtMUTel1.Text ,"string"} },
-                { {"Telefono2",txtMUTel2.Text ,"string" } },
-                { {"Mail",txtMUMail.Text ,"string" } },
-                { {"Status",Status ,"string" } },
-                { {"rol",cmbMURol.Text ,"string" } }
-            };
-
-
-
-            //llenamos la variable para extraer el id
-            string id = lstMUSeleccionU.CurrentRow.Cells[0].Value.ToString();
-            string[,,] _where = { { { "idusuarios", id, "integer" } } };
-
-            //Sacamos la sentencia del SQL de la funcion UpdateSQl
-            string updateQuery = QueryBuilder.UpdateSQL(_table, _values, _where);
-
-            DBManager.Actualizar(updateQuery);
-
-            //Fin de la rutina de actualizaciones
-        }
+     
 
         private void btnEUEliminar_Click(object sender, EventArgs e)
         {
@@ -290,10 +214,7 @@ namespace Nautilus
             DBManager.deleteSQL(query);
         }
 
-        private void tabEliminarUsuario_Enter(object sender, EventArgs e)
-        {
-            LlenadoEU();
-        }
+    
 
         private void LlenadoEU()
         {
@@ -329,6 +250,104 @@ namespace Nautilus
             seleccionEU();
         }
 
+        private void btnNUGuardar_Click_1(object sender, EventArgs e)
+        {
+            //Variables para la construccion de la sentencia
+            //UserID,Password,Nombre,ApellidoP,ApellidoM,Direccion1,Direccion2,Telefono1,Telefono2,Mail,Status,Rol
+            string userID;
+            string password;
+            string Nombre;
+            string ApellidoP;
+            string ApellidoM;
+            string Direccion1;
+            string Direccion2;
+            string Telefono1;
+            string Telefono2;
+            string mail;
 
+            string rol;
+
+            string query;
+
+            //Constructor de sentencia
+            //llenado de variables
+            userID = txtNUUsuario.Text;
+            password = txtNUPassword.Text;
+            Nombre = txtNUNombre.Text;
+            ApellidoP = txtNUApellidoP.Text;
+            ApellidoM = txtNUApellidoM.Text;
+            Direccion1 = txtNUDireccion1.Text;
+            Direccion2 = txtNUDireccion2.Text;
+            Telefono1 = txtNUTelefono1.Text;
+            Telefono2 = txtNUTelefono2.Text;
+            mail = txtNUMail.Text;
+
+            //Asigancion del la variable status
+            StatusSelector();
+
+            rol = cmbMURol.Text;
+
+            //construccion enorme del string
+            query = @"INSERT INTO usuarios (UserID,Password,Nombre,ApellidoP,ApellidoM,Direccion1,Direccion2," +
+"Telefono1,Telefono2,Mail,Status,rol) " +
+"VALUES " +
+"('" + userID + "','" + password + "','" + Nombre + "','" + ApellidoP + "','" + ApellidoM + "','" + Direccion1 + "','"
++ Direccion2 + "','" + Telefono1 + "','" + Telefono2 + "','" + mail + "','" + Status + "','" + rol + "');";
+
+
+            //MessageBox.Show(query);
+            DBManager.Insertar(query);
+
+        }
+        //Update Method For the Button
+        private void btnMUGuardar_Click_1(object sender, EventArgs e)
+        {
+            UpdateUser();
+        }
+
+
+        //Update user method
+        private void UpdateUser()
+        {
+            //declaracion y llenado de variables
+            string _table = "usuarios"; //Esta tabla es estatica para la rutina
+
+            //Llenado de la variable _values
+            string[,,] _values =
+           {
+                { { "UserID", txtMUUsuario.Text, "string" } },
+                { { "Password", txtMUPassword.Text,"string" } },
+                { {"Nombre",txtMUNombre.Text ,"string"} },
+                { {"ApellidoP",txtMUApellidoP.Text ,"string" } },
+                { {"ApellidoM",txtMUApellidoM.Text ,"string" } },
+                { {"Direccion1",txtMUDireccion.Text,"string" } },
+                { {"Direccion2",txtMUDireccion2.Text,"string" } },
+                { {"Telefono1",txtMUTel1.Text ,"string"} },
+                { {"Telefono2",txtMUTel2.Text ,"string" } },
+                { {"Mail",txtMUMail.Text ,"string" } },
+                { {"Status",Status ,"string" } },
+                { {"rol",cmbMURol.Text ,"string" } }
+            };
+
+
+
+            //llenamos la variable para extraer el id
+            string id = lstMUSeleccionU.CurrentRow.Cells[0].Value.ToString();
+            string[,,] _where = { { { "idusuarios", id, "integer" } } };
+
+            //Sacamos la sentencia del SQL de la funcion UpdateSQl
+            string updateQuery = QueryBuilder.UpdateSQL(_table, _values, _where);
+
+            DBManager.Actualizar(updateQuery);
+
+            //Fin de la rutina de actualizaciones
+        }
+
+        
+
+        private void tabEliminarUsuario_Enter(object sender, EventArgs e)
+        {
+            LlenadoEU();
+        }
     }
 }
