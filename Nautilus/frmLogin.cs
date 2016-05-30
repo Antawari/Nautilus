@@ -16,18 +16,53 @@ namespace Nautilus
         {
             InitializeComponent();
         }
+
+
         /*Buttons functionality
-         * 
-         * 
-         */
-        private void button1_Click(object sender, EventArgs e)
+            * 
+            * 
+            */
+            //Login
+        private void btnLogin_Click(object sender, EventArgs e)
         {
+            bool login = new bool();
+            string _username = txtLoginUsername.Text;
+            string _password = txtLoginPassword.Text;
+            login = DBManager.LogOk(_username, _password);
 
+            if (login == true)
+            {
+                MessageBox.Show("Congratulations you are logged in");
+            }
+            else
+            {
+                MessageBox.Show("Username or password Incorrect");
+                txtLoginPassword.Text = "";
+                txtLoginUsername.Text = "";
+                txtLoginUsername.Focus();
+            }
         }
-        //Close the program
-        private void button2_Click(object sender, EventArgs e)
-        {
 
+
+            //Close the program
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            CloseProgram();
+        }
+
+
+        private void CloseProgram()
+        {
+            if (System.Windows.Forms.Application.MessageLoop)
+            {
+                // WinForms app
+                System.Windows.Forms.Application.Exit();
+            }
+            else
+            {
+                // Console app
+                System.Environment.Exit(1);
+            }
         }
     }
 }

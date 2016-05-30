@@ -383,7 +383,7 @@ namespace Nautilus
          * 
          * 
          */
-             
+
         /* LOGIN FUNCTION
          * 
          * 
@@ -391,44 +391,48 @@ namespace Nautilus
          * 
          * 
          */
-         private static bool LogOk(string _username, string _password)
+        public static bool LogOk(string _username, string _password)
         {
             //Variable that stores the result
             bool value = new bool();
-            bool checkUsername = new bool();
-            bool checkPassword = new bool();
-            string sql =null;
 
-
-            //We set both variables to false
-            checkUsername = false;
-            checkPassword = false;
+            string sql = null;
+            int count = new int();
 
             Iniciador();
 
             //routine that checks both fields and compares them in the db
 
             //checkPassword
-            if (Conectarse()== true)
+            if (Conectarse() == true)
             {
-                /////HERE I AM
+                sql = @"SELECT COUNT(*) FROM usuarios where UserID='" +
+ _username + "' AND Pass='" + _password + "';";
+                MySqlCommand cmd = new MySqlCommand(sql, _conn);
+
+               
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                {
+                    count = Convert.ToInt32(result);
+                }
+
+                    
             }
-
-
-
-
-
-            //Algorithm that validates both variables
+                                
+            //Algorithm that validates if the row exists
             //and assigns the true to the value variable
-            if (checkPassword== true && checkUsername==true)
+            if (count>0)
             {
                 value = true;
                 return value;
+            } else
+            {
+                value = false;
+                return value;
             }
-
-
-            value = false;
-            return value;
+           
         }
          
 
