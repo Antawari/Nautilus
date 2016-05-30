@@ -30,5 +30,12 @@ namespace Nautilus
             userform.MdiParent = this;
             userform.Show();
         }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLogin loginForm = new frmLogin();
+            loginForm.MdiParent = this;
+            loginForm.Show();
+        }
     }
 }
