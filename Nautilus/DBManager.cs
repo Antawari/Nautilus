@@ -8,31 +8,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data;
 
-
 namespace Nautilus
 {
     class DBManager
     {
-        public static MySqlConnection _conn;
-
-
-        public void Conector()
+        //VARIABLE DECLARATION
+        private static MySqlConnection _conn;
+        /**********************************************************************************************************************************************/
+        private void Conector()
         {
-             Iniciador();
-
+            Iniciador();
         }
 
         private static void Iniciador()
         {
-
-            //Se asigna el inicio de conexion
-            //los datos de cadena de conexion son extraidos de el archivo de configuraccion del sistema
+            //Assign the connection string
+            //The connection string information is extracted from the
+            //ConfigManager class
             string cadenaConeccion = ConfigManager.ConnString();
-
             _conn = new MySqlConnection(cadenaConeccion);
-
         }
-
+        /**********************************************************************************************************************************************/
+        //Connection Function
         private static bool Conectarse()
         {
             try
@@ -42,17 +39,18 @@ namespace Nautilus
             }
             catch (MySqlException ex)
             {
-                /* Cuando se abre una coneccion y no es existoas
-                 * mysql puede manejar los errores.
-                 * los dos errores mas comunes son:
-                 * 0: No se puede conectar al servidor.
-                 * 1045: Usuario o contraseña invalidos. */
+                /* If the connection misses
+                 * we handle the error with a catcher
+                 * The most common errors are:
+                 * 0: Can't connect to the server (Ip or no internet connection available)
+                 * 1045: Invalid User or Password. */
                 switch (ex.Number)
                 {
+                    //Server unreachable case
                     case 0:
                         MessageBox.Show("No se puede conectar al servidor. Contactar al administrador");
                         break;
-
+                    //Bas username/password case
                     case 1045:
                         MessageBox.Show("Usuario/Contraseña invalidos, Corrija los datos de la conexion");
                         break;
@@ -60,12 +58,10 @@ namespace Nautilus
                 return false;
             }
         }
-
-
+        /**********************************************************************************************************************************************/
+        //Disconnection Function
         private static bool Desconectarse()
         {
-            //Rutina de desconexion
-
             try
             {
                 _conn.Close();
@@ -77,36 +73,41 @@ namespace Nautilus
                 return false;
             }
         }
-
-        public static void Insertar(string Query)
+        /**********************************************************************************************************************************************/
+        //Insert Sentence Function
+        //we make it boolean to check if the insertion was effective
+        public static bool Insertar(string Query)
         {
-            //Se inician las variables requeridas
+            //We initiate the variables
             Iniciador();
 
             if (Conectarse() == true)
             {
-                //Ejecucion del INSERT INTO
+                //Sql sentence execution
                 MySqlCommand sqlInsert = new MySqlCommand(Query, _conn);
                 sqlInsert.ExecuteNonQuery();
                 Desconectarse();
-                MessageBox.Show("Insertado con exito");
+                return true;
+                //MessageBox.Show("Insertado con exito");
             }
-
+            else
+            {
+                return false;
+            }
         }
-
-                
-        //rutina de select con DataTable para los datagrids
-        // Funciona para todos os datagrids del programa
-        //Acepta todas las sentencias Select.
+        /**********************************************************************************************************************************************/
+        //Select Routine with DataTable for datagrids
+        // Works for any datagrid inside the program
+        //Takes any SELECT sentence.
         public static DataTable SelectForGrid(string query)
         {
-            //Iniciar las variables
+            //Initiate variables
             Iniciador();
-            // Declaracion de variables de retorno
+            // Return variable declaration
             //DataSet dataSet;
             MySqlDataAdapter mySqlDataAdapter;
             DataTable dataSet = new DataTable();
-            //Iniciar conexion y rutina
+            //Initiate connection
             if (Conectarse() == true)
             {
                 mySqlDataAdapter = new MySqlDataAdapter(query, _conn);
@@ -116,21 +117,17 @@ namespace Nautilus
                 return dataSet;
             }
             return dataSet;
-            //fin de la rutina SelectForGrid           
+            //End of succesful routine          
         }
-
-        //rutina de select con DataTable para los datagrids
-        // Funciona para todos os datagrids del programa
-        //Acepta todas las sentencias Select.
-
+        /**********************************************************************************************************************************************/
+        //This is a special Select Routine that handles 
+        // Text fields
+        //Takes a special SELECT sentence
         public static DataSet SelectForText(string query)
         {
-            //Iniciar las variables
+            //Initiate Variables
             Iniciador();
-
             DataSet ds;
-
-
             if (Conectarse() == true)
             {
                 ds = new DataSet();
@@ -140,137 +137,111 @@ namespace Nautilus
                 mySqlDataAdapter.Dispose();
                 Desconectarse();
                 return ds;
-
             }
-
             ds = null;
             return ds;
-
         }
-
-        
-        // rutina de select para el grid de modificar usuario
+        /**********************************************************************************************************************************************/
+        // SELECT function for the modify user Grid
         public static List<string>[] Select(string query)
         {
-            //Iniciar Variables Necesarias
+            //Initiate variables
             Iniciador();
-
-
-            //Crear una lista para almacenar el resultado
+            //Create a List to store the result
             List<string>[] list = new List<string>[3];
             list[0] = new List<string>();
             list[1] = new List<string>();
             list[2] = new List<string>();
 
-            //Abrir conexion y ejecutar sentencia
+            //Open Connection and Execute sentence
             if (Conectarse() == true)
             {
-                //Crear el comando
+                //Create the command
                 MySqlCommand cmd = new MySqlCommand(query, _conn);
-
-                //Crear un lector de datos y ejecutar el comando
+                //Create a DataReader and execute the command
                 MySqlDataReader lectorDatos = cmd.ExecuteReader();
 
-                //Leer el lectorDatos y llenar la lista
+                //Read the DataReader and populate the List
                 while (lectorDatos.Read())
                 {
                     list[0].Add(lectorDatos["Nombre"] + "");
                     list[1].Add(lectorDatos["Apellido Paterno"] + "");
                     list[2].Add(lectorDatos["Apellido Materno"] + "");
-
                 }
 
-                //Cerrar lector de datos
+                //Close the DataReader
                 lectorDatos.Close();
 
-                //Cerrar conexion
+                //Close Connection
                 Desconectarse();
 
-                //Retornar la lista al componente que la solicita.
+                //Return the result
                 return list;
-
             }
             else
             {
-                return list;
+                return list; //Return empty list
             }
-
-
-
-
         }
-
-
-
-
-        //Funcion publica para sentencia UPDATE
-
+        /**********************************************************************************************************************************************/
+        //Public Function for UPDATE sentence
         public static void Actualizar(string query)
         {
-            //inicializar variables
+            //Initialize variables
             Iniciador();
 
-            //Conector y rutina
+            //Connector and method
             if (Conectarse() == true)
             {
-                //Ejecucion del Update
+                //UPDATE execution
                 MySqlCommand sqlUpdate = new MySqlCommand(query, _conn);
                 sqlUpdate.ExecuteNonQuery();
                 Desconectarse();
                 MessageBox.Show("Actualizado con exito");
             }
-
             else
             {
                 MessageBox.Show("Hubo un problema con la actualizacion");
             }
-
-
         }
-
-
-
+        /**********************************************************************************************************************************************/
+        //Public method for DELETE sentence
         public static void deleteSQL(string query)
         {
-            //inicializar variables
+            //Start Variables
             Iniciador();
 
-            //Conector y rutina
+            //Connect and method
             if (Conectarse() == true)
             {
-                //Ejecucion del Update
+                //UPDATE execution
                 MySqlCommand sqlUpdate = new MySqlCommand(query, _conn);
                 sqlUpdate.ExecuteNonQuery();
                 Desconectarse();
                 MessageBox.Show("eliminado con exito");
             }
-
             else
             {
                 MessageBox.Show("Hubo un problema con la eliminacion");
             }
             Desconectarse();
         }
-
-
+        /**********************************************************************************************************************************************/
+        //Public Method to test the connection
         public static bool testConn(string connectionString)
         {
+            /* INCOMPLETE */
             bool valor = false;
-
-            //Iniciar conexion y revisar si es posible con los atributos obetenidos del formulario.
+            //Start Variables
             Iniciador();
-
-
             return valor;
         }
-
-        //to backup the database
-
+        /**********************************************************************************************************************************************/
+        //Backup the DATABASE
         public static void backupSQL(string ruta)
         {
             //Start Variables
             Iniciador();
-
             //Connector and routine
             if (Conectarse() == true)
             {
@@ -278,45 +249,42 @@ namespace Nautilus
                 using (MySqlCommand command = new MySqlCommand())
                 {
                     using (MySqlBackup backup = new MySqlBackup(command))
-                    { 
+                    {
                         command.Connection = _conn;
                         backup.ExportToFile(ruta);
-                        
                         Desconectarse();
                         MessageBox.Show("Actualizado con exito");
                     }
                 }
             }
-
             else
             {
                 MessageBox.Show("Hubo un problema con la Conexion");
             }
         }
-
-
+        /**********************************************************************************************************************************************/
         //Repair DB function
         public static void RepairDB(string query)
         {
             //Initiate Variables and conection
             Iniciador();
             Conectarse();
-            
+
             //Components necessary for the function
             DataTable dt = new DataTable();
             DataSet ds = new DataSet();
             MySqlDataAdapter ad = new MySqlDataAdapter(query, _conn);
             ad.Fill(dt);
             //Loop that executes repair table by table
-
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 RepairTable("repair table " + dt.Rows[i][0].ToString() + "");
             }
             Desconectarse();
         }
-
-        public static  void RepairTable(string query)
+        /**********************************************************************************************************************************************/
+        //Function that once we have the list executes the repair table by table
+        private static void RepairTable(string query)
         {
             //Method executed in the RepairDB loop
             MySqlCommand cmd = new MySqlCommand();
@@ -325,11 +293,10 @@ namespace Nautilus
             cmd.CommandText = query;
             cmd.ExecuteNonQuery();
         }
-
+        /**********************************************************************************************************************************************/
         /* Important Function.
          * Review for upcoming updates
          */
-
         //List that returns the overall health state of the tables in the current Database
         public static List<string> HealthDB()
         {
@@ -338,7 +305,7 @@ namespace Nautilus
             string query2 = null;
             MySqlCommand cmd = new MySqlCommand();
             List<string> statusList = new List<string>();
-            MySqlDataReader lectorDatos = null ;
+            MySqlDataReader lectorDatos = null;
             Iniciador();
             //Abrir conexion y ejecutar sentencia
             if (Conectarse() == true)
@@ -352,13 +319,11 @@ namespace Nautilus
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-
                     tabla = dt.Rows[i][0].ToString();
                     query2 = "CHECK TABLE " + tabla + "";
                     //create the command
                     cmd = _conn.CreateCommand();
                     cmd.CommandText = query2;
-                    
                     //create a reader and execute the command
                     lectorDatos = cmd.ExecuteReader();
                     lectorDatos.Read();
@@ -366,7 +331,6 @@ namespace Nautilus
                     statusList.Add("TABLA:" + tabla + " = " + lectorDatos["Msg_text"]);
                     //Close the data reader for a new query
                     lectorDatos.Close();
-                    
                 }
                 //disconnect and return the list
                 Desconectarse();
@@ -375,72 +339,50 @@ namespace Nautilus
             //disconnect, nullify the list and return the null parameter
             Desconectarse();
             statusList = null;
-                return statusList;
-       }
+            return statusList;
+        }
 
         /* End of health function
-         * 
-         * 
-         * 
-         */
+       */
 
-        /* LOGIN FUNCTION
-         * 
-         * 
-         * 
-         * 
-         * 
-         */
-        public static bool LogOk(string _username, string _password)
+        /**********************************************************************************************************************************************/
+        /* LOGIN FUNCTION*/
+          public static bool LogOk(string _username, string _password)
         {
             //Variable that stores the result
             bool value = new bool();
-
             string sql = null;
             int count = new int();
 
             Iniciador();
 
             //routine that checks both fields and compares them in the db
-
             //checkPassword
             if (Conectarse() == true)
             {
                 sql = @"SELECT COUNT(*) FROM usuarios where UserID='" +
  _username + "' AND Pass='" + _password + "';";
                 MySqlCommand cmd = new MySqlCommand(sql, _conn);
-
-               
                 object result = cmd.ExecuteScalar();
-
                 if (result != null)
                 {
                     count = Convert.ToInt32(result);
                 }
-
-                    
             }
-                                
+
             //Algorithm that validates if the row exists
             //and assigns the true to the value variable
-            if (count>0)
+            if (count > 0)
             {
                 value = true;
                 return value;
-            } else
+            }
+            else
             {
                 value = false;
                 return value;
             }
-           
         }
-         
-
-             
-                
-
         
-
-
     }
 }

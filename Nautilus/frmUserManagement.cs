@@ -132,7 +132,7 @@ namespace Nautilus
             //Para llenar los campos a modificar, hacemos una busqueda con select.
             string id = lstMUSeleccionU.CurrentRow.Cells[0].Value.ToString();
             //MessageBox.Show(id);
-            string query = @"SELECT UserID,Password,Nombre,ApellidoP,ApellidoM,Direccion1,Direccion2," +
+            string query = @"SELECT UserID,Pass,Nombre,ApellidoP,ApellidoM,Direccion1,Direccion2," +
 "Telefono1,Telefono2,Mail,Status,rol from usuarios WHERE idusuarios='"
 + id + "' order by Nombre; ";
 
@@ -140,7 +140,7 @@ namespace Nautilus
             DataSet ds = DBManager.SelectForText(query);
 
             txtMUUsuario.Text = ds.Tables[0].Rows[0]["UserID"].ToString();
-            txtMUPassword.Text = ds.Tables[0].Rows[0]["Password"].ToString();
+            txtMUPassword.Text = ds.Tables[0].Rows[0]["Pass"].ToString();
             txtMUNombre.Text = ds.Tables[0].Rows[0]["Nombre"].ToString();
             txtMUApellidoP.Text = ds.Tables[0].Rows[0]["ApellidoP"].ToString();
             txtMUApellidoM.Text = ds.Tables[0].Rows[0]["ApellidoM"].ToString();
@@ -288,7 +288,7 @@ namespace Nautilus
             rol = cmbMURol.Text;
 
             //construccion enorme del string
-            query = @"INSERT INTO usuarios (UserID,Password,Nombre,ApellidoP,ApellidoM,Direccion1,Direccion2," +
+            query = @"INSERT INTO usuarios (UserID,Pass,Nombre,ApellidoP,ApellidoM,Direccion1,Direccion2," +
 "Telefono1,Telefono2,Mail,Status,rol) " +
 "VALUES " +
 "('" + userID + "','" + password + "','" + Nombre + "','" + ApellidoP + "','" + ApellidoM + "','" + Direccion1 + "','"
@@ -316,7 +316,7 @@ namespace Nautilus
             string[,,] _values =
            {
                 { { "UserID", txtMUUsuario.Text, "string" } },
-                { { "Password", txtMUPassword.Text,"string" } },
+                { { "Pass", txtMUPassword.Text,"string" } },
                 { {"Nombre",txtMUNombre.Text ,"string"} },
                 { {"ApellidoP",txtMUApellidoP.Text ,"string" } },
                 { {"ApellidoM",txtMUApellidoM.Text ,"string" } },

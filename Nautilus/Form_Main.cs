@@ -37,5 +37,12 @@ namespace Nautilus
             loginForm.MdiParent = this;
             loginForm.Show();
         }
+
+        private void dispositivosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormNautilus nautilusform = new FormNautilus();
+            nautilusform.MdiParent = this;
+            nautilusform.Show();
+        }
     }
 }
