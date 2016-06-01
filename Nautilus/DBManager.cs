@@ -182,7 +182,7 @@ namespace Nautilus
         }
         /**********************************************************************************************************************************************/
         //Public Function for UPDATE sentence
-        public static void Actualizar(string query)
+        public static bool Actualizar(string query)
         {
             //Initialize variables
             Iniciador();
@@ -194,11 +194,13 @@ namespace Nautilus
                 MySqlCommand sqlUpdate = new MySqlCommand(query, _conn);
                 sqlUpdate.ExecuteNonQuery();
                 Desconectarse();
-                MessageBox.Show("Actualizado con exito");
+                //MessageBox.Show("Actualizado con exito");
+                return true;
             }
             else
             {
-                MessageBox.Show("Hubo un problema con la actualizacion");
+                //MessageBox.Show("Hubo un problema con la actualizacion");
+                return false;
             }
         }
         /**********************************************************************************************************************************************/

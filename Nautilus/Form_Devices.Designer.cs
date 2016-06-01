@@ -1,6 +1,6 @@
 ﻿namespace Nautilus
 {
-    partial class Form_Nautilus
+    partial class Form_Devices
     {
         /// <summary>
         /// Required designer variable.
@@ -49,17 +49,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TabNautMod = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.txtNautModSearch = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dgNautMod = new System.Windows.Forms.DataGridView();
+            this.btnNautModCancel = new System.Windows.Forms.Button();
+            this.btnNautModClean = new System.Windows.Forms.Button();
+            this.btnNautModModify = new System.Windows.Forms.Button();
+            this.txtNautModDescription = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.dateNautMod = new System.Windows.Forms.DateTimePicker();
+            this.rbNautModInactivo = new System.Windows.Forms.RadioButton();
+            this.rbNautModActivo = new System.Windows.Forms.RadioButton();
+            this.cmbNautModTipo = new System.Windows.Forms.ComboBox();
+            this.txtNautModNombre = new System.Windows.Forms.TextBox();
+            this.txtNautModID = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -71,6 +74,7 @@
             this.groupNautAlta.SuspendLayout();
             this.TabNautMod.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgNautMod)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -81,7 +85,7 @@
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(461, 488);
+            this.tabControl1.Size = new System.Drawing.Size(461, 563);
             this.tabControl1.TabIndex = 0;
             // 
             // TabNautAlta
@@ -90,7 +94,7 @@
             this.TabNautAlta.Location = new System.Drawing.Point(4, 22);
             this.TabNautAlta.Name = "TabNautAlta";
             this.TabNautAlta.Padding = new System.Windows.Forms.Padding(3);
-            this.TabNautAlta.Size = new System.Drawing.Size(453, 462);
+            this.TabNautAlta.Size = new System.Drawing.Size(453, 537);
             this.TabNautAlta.TabIndex = 0;
             this.TabNautAlta.Text = "Alta";
             this.TabNautAlta.UseVisualStyleBackColor = true;
@@ -124,25 +128,27 @@
             this.btnNautAltaCancel.Location = new System.Drawing.Point(195, 297);
             this.btnNautAltaCancel.Name = "btnNautAltaCancel";
             this.btnNautAltaCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnNautAltaCancel.TabIndex = 15;
+            this.btnNautAltaCancel.TabIndex = 9;
             this.btnNautAltaCancel.Text = "Cancelar";
             this.btnNautAltaCancel.UseVisualStyleBackColor = true;
+            this.btnNautAltaCancel.Click += new System.EventHandler(this.btnNautAltaCancel_Click);
             // 
             // btnNautAltaClean
             // 
             this.btnNautAltaClean.Location = new System.Drawing.Point(13, 222);
             this.btnNautAltaClean.Name = "btnNautAltaClean";
             this.btnNautAltaClean.Size = new System.Drawing.Size(100, 23);
-            this.btnNautAltaClean.TabIndex = 14;
+            this.btnNautAltaClean.TabIndex = 8;
             this.btnNautAltaClean.Text = "Limpiar formulario";
             this.btnNautAltaClean.UseVisualStyleBackColor = true;
+            this.btnNautAltaClean.Click += new System.EventHandler(this.btnNautAltaClean_Click);
             // 
             // btnNautAltaAgregar
             // 
             this.btnNautAltaAgregar.Location = new System.Drawing.Point(287, 298);
             this.btnNautAltaAgregar.Name = "btnNautAltaAgregar";
             this.btnNautAltaAgregar.Size = new System.Drawing.Size(136, 23);
-            this.btnNautAltaAgregar.TabIndex = 13;
+            this.btnNautAltaAgregar.TabIndex = 10;
             this.btnNautAltaAgregar.Text = "Agregar Dispositivo";
             this.btnNautAltaAgregar.UseVisualStyleBackColor = true;
             this.btnNautAltaAgregar.Click += new System.EventHandler(this.btnNautAltaAgregar_Click);
@@ -152,7 +158,7 @@
             this.txtNautAltaDescripcion.Location = new System.Drawing.Point(195, 175);
             this.txtNautAltaDescripcion.Name = "txtNautAltaDescripcion";
             this.txtNautAltaDescripcion.Size = new System.Drawing.Size(229, 117);
-            this.txtNautAltaDescripcion.TabIndex = 12;
+            this.txtNautAltaDescripcion.TabIndex = 7;
             this.txtNautAltaDescripcion.Text = "";
             // 
             // label6
@@ -169,7 +175,7 @@
             this.dateNautAltaActivacion.Location = new System.Drawing.Point(195, 136);
             this.dateNautAltaActivacion.Name = "dateNautAltaActivacion";
             this.dateNautAltaActivacion.Size = new System.Drawing.Size(229, 20);
-            this.dateNautAltaActivacion.TabIndex = 10;
+            this.dateNautAltaActivacion.TabIndex = 6;
             // 
             // rbNautAltaInactivo
             // 
@@ -177,7 +183,7 @@
             this.rbNautAltaInactivo.Location = new System.Drawing.Point(287, 107);
             this.rbNautAltaInactivo.Name = "rbNautAltaInactivo";
             this.rbNautAltaInactivo.Size = new System.Drawing.Size(63, 17);
-            this.rbNautAltaInactivo.TabIndex = 9;
+            this.rbNautAltaInactivo.TabIndex = 5;
             this.rbNautAltaInactivo.TabStop = true;
             this.rbNautAltaInactivo.Text = "Inactivo";
             this.rbNautAltaInactivo.UseVisualStyleBackColor = true;
@@ -188,7 +194,7 @@
             this.rbNautAltaActivo.Location = new System.Drawing.Point(195, 107);
             this.rbNautAltaActivo.Name = "rbNautAltaActivo";
             this.rbNautAltaActivo.Size = new System.Drawing.Size(55, 17);
-            this.rbNautAltaActivo.TabIndex = 8;
+            this.rbNautAltaActivo.TabIndex = 4;
             this.rbNautAltaActivo.TabStop = true;
             this.rbNautAltaActivo.Text = "Activo";
             this.rbNautAltaActivo.UseVisualStyleBackColor = true;
@@ -199,21 +205,21 @@
             this.cmbNautAltaTipo.Location = new System.Drawing.Point(195, 78);
             this.cmbNautAltaTipo.Name = "cmbNautAltaTipo";
             this.cmbNautAltaTipo.Size = new System.Drawing.Size(229, 21);
-            this.cmbNautAltaTipo.TabIndex = 7;
+            this.cmbNautAltaTipo.TabIndex = 3;
             // 
             // txtNautAltaNombre
             // 
             this.txtNautAltaNombre.Location = new System.Drawing.Point(195, 46);
             this.txtNautAltaNombre.Name = "txtNautAltaNombre";
             this.txtNautAltaNombre.Size = new System.Drawing.Size(229, 20);
-            this.txtNautAltaNombre.TabIndex = 6;
+            this.txtNautAltaNombre.TabIndex = 2;
             // 
             // txtNautAltaID
             // 
             this.txtNautAltaID.Location = new System.Drawing.Point(195, 17);
             this.txtNautAltaID.Name = "txtNautAltaID";
             this.txtNautAltaID.Size = new System.Drawing.Size(229, 20);
-            this.txtNautAltaID.TabIndex = 5;
+            this.txtNautAltaID.TabIndex = 1;
             // 
             // label5
             // 
@@ -266,24 +272,28 @@
             this.TabNautMod.Location = new System.Drawing.Point(4, 22);
             this.TabNautMod.Name = "TabNautMod";
             this.TabNautMod.Padding = new System.Windows.Forms.Padding(3);
-            this.TabNautMod.Size = new System.Drawing.Size(453, 462);
+            this.TabNautMod.Size = new System.Drawing.Size(453, 537);
             this.TabNautMod.TabIndex = 1;
             this.TabNautMod.Text = "Modificacion";
             this.TabNautMod.UseVisualStyleBackColor = true;
+            this.TabNautMod.Enter += new System.EventHandler(this.TabNautMod_Enter);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button6);
-            this.groupBox1.Controls.Add(this.richTextBox2);
+            this.groupBox1.Controls.Add(this.txtNautModSearch);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.dgNautMod);
+            this.groupBox1.Controls.Add(this.btnNautModCancel);
+            this.groupBox1.Controls.Add(this.btnNautModClean);
+            this.groupBox1.Controls.Add(this.btnNautModModify);
+            this.groupBox1.Controls.Add(this.txtNautModDescription);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.dateNautMod);
+            this.groupBox1.Controls.Add(this.rbNautModInactivo);
+            this.groupBox1.Controls.Add(this.rbNautModActivo);
+            this.groupBox1.Controls.Add(this.cmbNautModTipo);
+            this.groupBox1.Controls.Add(this.txtNautModNombre);
+            this.groupBox1.Controls.Add(this.txtNautModID);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label10);
@@ -291,109 +301,140 @@
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Location = new System.Drawing.Point(7, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(439, 449);
+            this.groupBox1.Size = new System.Drawing.Size(439, 524);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
-            // button4
+            // txtNautModSearch
             // 
-            this.button4.Location = new System.Drawing.Point(201, 417);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "Cancelar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.txtNautModSearch.Location = new System.Drawing.Point(106, 13);
+            this.txtNautModSearch.Name = "txtNautModSearch";
+            this.txtNautModSearch.Size = new System.Drawing.Size(327, 20);
+            this.txtNautModSearch.TabIndex = 18;
             // 
-            // button5
+            // label13
             // 
-            this.button5.Location = new System.Drawing.Point(19, 342);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 23);
-            this.button5.TabIndex = 14;
-            this.button5.Text = "Limpiar formulario";
-            this.button5.UseVisualStyleBackColor = true;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 16);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(94, 13);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "Buscar Dispositivo";
             // 
-            // button6
+            // dgNautMod
             // 
-            this.button6.Location = new System.Drawing.Point(293, 418);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(136, 23);
-            this.button6.TabIndex = 13;
-            this.button6.Text = "Agregar Dispositivo";
-            this.button6.UseVisualStyleBackColor = true;
+            this.dgNautMod.AllowUserToAddRows = false;
+            this.dgNautMod.AllowUserToDeleteRows = false;
+            this.dgNautMod.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgNautMod.Location = new System.Drawing.Point(6, 50);
+            this.dgNautMod.Name = "dgNautMod";
+            this.dgNautMod.ReadOnly = true;
+            this.dgNautMod.Size = new System.Drawing.Size(426, 144);
+            this.dgNautMod.TabIndex = 16;
+            this.dgNautMod.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgNautMod_CellMouseClick);
             // 
-            // richTextBox2
+            // btnNautModCancel
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(201, 295);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(229, 117);
-            this.richTextBox2.TabIndex = 12;
-            this.richTextBox2.Text = "";
+            this.btnNautModCancel.Location = new System.Drawing.Point(191, 490);
+            this.btnNautModCancel.Name = "btnNautModCancel";
+            this.btnNautModCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnNautModCancel.TabIndex = 15;
+            this.btnNautModCancel.Text = "Cancelar";
+            this.btnNautModCancel.UseVisualStyleBackColor = true;
+            this.btnNautModCancel.Click += new System.EventHandler(this.btnNautModCancel_Click);
+            // 
+            // btnNautModClean
+            // 
+            this.btnNautModClean.Location = new System.Drawing.Point(9, 415);
+            this.btnNautModClean.Name = "btnNautModClean";
+            this.btnNautModClean.Size = new System.Drawing.Size(100, 23);
+            this.btnNautModClean.TabIndex = 14;
+            this.btnNautModClean.Text = "Limpiar formulario";
+            this.btnNautModClean.UseVisualStyleBackColor = true;
+            this.btnNautModClean.Click += new System.EventHandler(this.btnNautModClean_Click);
+            // 
+            // btnNautModModify
+            // 
+            this.btnNautModModify.Location = new System.Drawing.Point(283, 491);
+            this.btnNautModModify.Name = "btnNautModModify";
+            this.btnNautModModify.Size = new System.Drawing.Size(136, 23);
+            this.btnNautModModify.TabIndex = 13;
+            this.btnNautModModify.Text = "Agregar Dispositivo";
+            this.btnNautModModify.UseVisualStyleBackColor = true;
+            this.btnNautModModify.Click += new System.EventHandler(this.btnNautModModify_Click);
+            // 
+            // txtNautModDescription
+            // 
+            this.txtNautModDescription.Location = new System.Drawing.Point(191, 368);
+            this.txtNautModDescription.Name = "txtNautModDescription";
+            this.txtNautModDescription.Size = new System.Drawing.Size(229, 117);
+            this.txtNautModDescription.TabIndex = 12;
+            this.txtNautModDescription.Text = "";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 298);
+            this.label7.Location = new System.Drawing.Point(6, 371);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(132, 13);
             this.label7.TabIndex = 11;
             this.label7.Text = "Descripcion del dispositivo";
             // 
-            // dateTimePicker2
+            // dateNautMod
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(201, 256);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(229, 20);
-            this.dateTimePicker2.TabIndex = 10;
+            this.dateNautMod.Location = new System.Drawing.Point(191, 329);
+            this.dateNautMod.Name = "dateNautMod";
+            this.dateNautMod.Size = new System.Drawing.Size(229, 20);
+            this.dateNautMod.TabIndex = 10;
             // 
-            // radioButton3
+            // rbNautModInactivo
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(293, 227);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(85, 17);
-            this.radioButton3.TabIndex = 9;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "radioButton3";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rbNautModInactivo.AutoSize = true;
+            this.rbNautModInactivo.Location = new System.Drawing.Point(283, 300);
+            this.rbNautModInactivo.Name = "rbNautModInactivo";
+            this.rbNautModInactivo.Size = new System.Drawing.Size(63, 17);
+            this.rbNautModInactivo.TabIndex = 9;
+            this.rbNautModInactivo.TabStop = true;
+            this.rbNautModInactivo.Text = "Inactivo";
+            this.rbNautModInactivo.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // rbNautModActivo
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(201, 227);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(85, 17);
-            this.radioButton4.TabIndex = 8;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "radioButton4";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.rbNautModActivo.AutoSize = true;
+            this.rbNautModActivo.Location = new System.Drawing.Point(191, 300);
+            this.rbNautModActivo.Name = "rbNautModActivo";
+            this.rbNautModActivo.Size = new System.Drawing.Size(55, 17);
+            this.rbNautModActivo.TabIndex = 8;
+            this.rbNautModActivo.TabStop = true;
+            this.rbNautModActivo.Text = "Activo";
+            this.rbNautModActivo.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // cmbNautModTipo
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(201, 198);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(229, 21);
-            this.comboBox2.TabIndex = 7;
+            this.cmbNautModTipo.FormattingEnabled = true;
+            this.cmbNautModTipo.Location = new System.Drawing.Point(191, 271);
+            this.cmbNautModTipo.Name = "cmbNautModTipo";
+            this.cmbNautModTipo.Size = new System.Drawing.Size(229, 21);
+            this.cmbNautModTipo.TabIndex = 7;
             // 
-            // textBox3
+            // txtNautModNombre
             // 
-            this.textBox3.Location = new System.Drawing.Point(201, 166);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(229, 20);
-            this.textBox3.TabIndex = 6;
+            this.txtNautModNombre.Location = new System.Drawing.Point(191, 239);
+            this.txtNautModNombre.Name = "txtNautModNombre";
+            this.txtNautModNombre.Size = new System.Drawing.Size(229, 20);
+            this.txtNautModNombre.TabIndex = 6;
             // 
-            // textBox4
+            // txtNautModID
             // 
-            this.textBox4.Location = new System.Drawing.Point(201, 137);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(229, 20);
-            this.textBox4.TabIndex = 5;
+            this.txtNautModID.Location = new System.Drawing.Point(191, 210);
+            this.txtNautModID.Name = "txtNautModID";
+            this.txtNautModID.Size = new System.Drawing.Size(229, 20);
+            this.txtNautModID.TabIndex = 5;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 256);
+            this.label8.Location = new System.Drawing.Point(6, 329);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(176, 13);
             this.label8.TabIndex = 4;
@@ -402,7 +443,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 227);
+            this.label9.Location = new System.Drawing.Point(6, 300);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(106, 13);
             this.label9.TabIndex = 3;
@@ -411,7 +452,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(16, 198);
+            this.label10.Location = new System.Drawing.Point(6, 271);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(95, 13);
             this.label10.TabIndex = 2;
@@ -420,7 +461,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(16, 169);
+            this.label11.Location = new System.Drawing.Point(6, 242);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(113, 13);
             this.label11.TabIndex = 1;
@@ -429,7 +470,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(16, 140);
+            this.label12.Location = new System.Drawing.Point(6, 213);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(136, 13);
             this.label12.TabIndex = 0;
@@ -440,18 +481,18 @@
             this.TabNautBaja.Location = new System.Drawing.Point(4, 22);
             this.TabNautBaja.Name = "TabNautBaja";
             this.TabNautBaja.Padding = new System.Windows.Forms.Padding(3);
-            this.TabNautBaja.Size = new System.Drawing.Size(453, 462);
+            this.TabNautBaja.Size = new System.Drawing.Size(453, 537);
             this.TabNautBaja.TabIndex = 2;
             this.TabNautBaja.Text = "Baja";
             this.TabNautBaja.UseVisualStyleBackColor = true;
             // 
-            // Form_Nautilus
+            // Form_Devices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 506);
+            this.ClientSize = new System.Drawing.Size(478, 588);
             this.Controls.Add(this.tabControl1);
-            this.Name = "Form_Nautilus";
+            this.Name = "Form_Devices";
             this.Text = "Dispositivos";
             this.tabControl1.ResumeLayout(false);
             this.TabNautAlta.ResumeLayout(false);
@@ -460,6 +501,7 @@
             this.TabNautMod.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgNautMod)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -488,21 +530,24 @@
         private System.Windows.Forms.RichTextBox txtNautAltaDescripcion;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Button btnNautModCancel;
+        private System.Windows.Forms.Button btnNautModClean;
+        private System.Windows.Forms.Button btnNautModModify;
+        private System.Windows.Forms.RichTextBox txtNautModDescription;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.DateTimePicker dateNautMod;
+        private System.Windows.Forms.RadioButton rbNautModInactivo;
+        private System.Windows.Forms.RadioButton rbNautModActivo;
+        private System.Windows.Forms.ComboBox cmbNautModTipo;
+        private System.Windows.Forms.TextBox txtNautModNombre;
+        private System.Windows.Forms.TextBox txtNautModID;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DataGridView dgNautMod;
+        private System.Windows.Forms.TextBox txtNautModSearch;
+        private System.Windows.Forms.Label label13;
     }
 }
