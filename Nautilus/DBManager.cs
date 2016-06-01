@@ -160,7 +160,6 @@ namespace Nautilus
                 MySqlCommand cmd = new MySqlCommand(query, _conn);
                 //Create a DataReader and execute the command
                 MySqlDataReader lectorDatos = cmd.ExecuteReader();
-
                 //Read the DataReader and populate the List
                 while (lectorDatos.Read())
                 {
@@ -171,10 +170,8 @@ namespace Nautilus
 
                 //Close the DataReader
                 lectorDatos.Close();
-
                 //Close Connection
                 Desconectarse();
-
                 //Return the result
                 return list;
             }
@@ -347,7 +344,7 @@ namespace Nautilus
 
         /**********************************************************************************************************************************************/
         /* LOGIN FUNCTION*/
-          public static bool LogOk(string _username, string _password)
+        public static bool LogOk(string _username, string _password)
         {
             //Variable that stores the result
             bool value = new bool();
@@ -369,7 +366,6 @@ namespace Nautilus
                     count = Convert.ToInt32(result);
                 }
             }
-
             //Algorithm that validates if the row exists
             //and assigns the true to the value variable
             if (count > 0)
@@ -383,6 +379,6 @@ namespace Nautilus
                 return value;
             }
         }
-        
+
     }
 }

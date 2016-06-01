@@ -40,7 +40,7 @@ namespace Nautilus
 
         private void dispositivosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormNautilus nautilusform = new FormNautilus();
+            Form_Nautilus nautilusform = new Form_Nautilus();
             nautilusform.MdiParent = this;
             nautilusform.Show();
         }
