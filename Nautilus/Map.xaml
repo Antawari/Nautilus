@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Nautilus.Map"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF">
+    <Grid>
+        <m:Map Name="NautMap"
+               CredentialsProvider="Suwu6IEtErs5WWBb9Xa5~_6AT_skeNUVv6tz_Gk5pRA~AtyqMmLsmD7KeIXPvewXJq9U4GQu3fWOs4hss9YSWd8YJJ9d4aUIY_F6Y2uRbTCm"/>
+    </Grid>
+</UserControl>

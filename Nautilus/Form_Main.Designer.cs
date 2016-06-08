@@ -34,6 +34,8 @@
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dispositivosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beaconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beaconToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +45,8 @@
             this.herramientasToolStripMenuItem,
             this.usuariosToolStripMenuItem,
             this.loginToolStripMenuItem,
-            this.dispositivosToolStripMenuItem});
+            this.dispositivosToolStripMenuItem,
+            this.beaconToolStripMenuItem1});
             this.MenuMain.Location = new System.Drawing.Point(0, 0);
             this.MenuMain.Name = "MenuMain";
             this.MenuMain.Size = new System.Drawing.Size(1230, 24);
@@ -81,10 +84,25 @@
             // 
             // dispositivosToolStripMenuItem
             // 
+            this.dispositivosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.beaconToolStripMenuItem});
             this.dispositivosToolStripMenuItem.Name = "dispositivosToolStripMenuItem";
             this.dispositivosToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.dispositivosToolStripMenuItem.Text = "Dispositivos";
             this.dispositivosToolStripMenuItem.Click += new System.EventHandler(this.dispositivosToolStripMenuItem_Click);
+            // 
+            // beaconToolStripMenuItem
+            // 
+            this.beaconToolStripMenuItem.Name = "beaconToolStripMenuItem";
+            this.beaconToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.beaconToolStripMenuItem.Text = "Beacon";
+            // 
+            // beaconToolStripMenuItem1
+            // 
+            this.beaconToolStripMenuItem1.Name = "beaconToolStripMenuItem1";
+            this.beaconToolStripMenuItem1.Size = new System.Drawing.Size(58, 20);
+            this.beaconToolStripMenuItem1.Text = "Beacon";
+            this.beaconToolStripMenuItem1.Click += new System.EventHandler(this.beaconToolStripMenuItem1_Click);
             // 
             // Form_Main
             // 
@@ -112,6 +130,8 @@
         private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dispositivosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem beaconToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem beaconToolStripMenuItem1;
     }
 }
 

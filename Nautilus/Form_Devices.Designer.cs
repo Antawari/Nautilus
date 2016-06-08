@@ -69,12 +69,20 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.TabNautBaja = new System.Windows.Forms.TabPage();
+            this.btnNautModSearch = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.TabNautAlta.SuspendLayout();
             this.groupNautAlta.SuspendLayout();
             this.TabNautMod.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgNautMod)).BeginInit();
+            this.TabNautBaja.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -280,6 +288,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnNautModSearch);
             this.groupBox1.Controls.Add(this.txtNautModSearch);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.dgNautMod);
@@ -309,7 +318,7 @@
             // 
             this.txtNautModSearch.Location = new System.Drawing.Point(106, 13);
             this.txtNautModSearch.Name = "txtNautModSearch";
-            this.txtNautModSearch.Size = new System.Drawing.Size(327, 20);
+            this.txtNautModSearch.Size = new System.Drawing.Size(240, 20);
             this.txtNautModSearch.TabIndex = 18;
             // 
             // label13
@@ -478,6 +487,11 @@
             // 
             // TabNautBaja
             // 
+            this.TabNautBaja.Controls.Add(this.button1);
+            this.TabNautBaja.Controls.Add(this.textBox1);
+            this.TabNautBaja.Controls.Add(this.label14);
+            this.TabNautBaja.Controls.Add(this.dataGridView1);
+            this.TabNautBaja.Controls.Add(this.button2);
             this.TabNautBaja.Location = new System.Drawing.Point(4, 22);
             this.TabNautBaja.Name = "TabNautBaja";
             this.TabNautBaja.Padding = new System.Windows.Forms.Padding(3);
@@ -486,6 +500,61 @@
             this.TabNautBaja.Text = "Baja";
             this.TabNautBaja.UseVisualStyleBackColor = true;
             // 
+            // btnNautModSearch
+            // 
+            this.btnNautModSearch.Location = new System.Drawing.Point(357, 11);
+            this.btnNautModSearch.Name = "btnNautModSearch";
+            this.btnNautModSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnNautModSearch.TabIndex = 19;
+            this.btnNautModSearch.Text = "Buscar";
+            this.btnNautModSearch.UseVisualStyleBackColor = true;
+            this.btnNautModSearch.Click += new System.EventHandler(this.btnNautModSearch_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(364, 17);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Buscar";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(113, 19);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(240, 20);
+            this.textBox1.TabIndex = 23;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(13, 22);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(94, 13);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Buscar Dispositivo";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(13, 56);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(426, 144);
+            this.dataGridView1.TabIndex = 21;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(303, 243);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(136, 23);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "Agregar Dispositivo";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Form_Devices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -493,7 +562,7 @@
             this.ClientSize = new System.Drawing.Size(478, 588);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form_Devices";
-            this.Text = "Dispositivos";
+            this.Text = "Manejador de Dispositivos";
             this.tabControl1.ResumeLayout(false);
             this.TabNautAlta.ResumeLayout(false);
             this.groupNautAlta.ResumeLayout(false);
@@ -502,6 +571,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgNautMod)).EndInit();
+            this.TabNautBaja.ResumeLayout(false);
+            this.TabNautBaja.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -549,5 +621,11 @@
         private System.Windows.Forms.DataGridView dgNautMod;
         private System.Windows.Forms.TextBox txtNautModSearch;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnNautModSearch;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button2;
     }
 }

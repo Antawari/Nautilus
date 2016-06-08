@@ -44,5 +44,12 @@ namespace Nautilus
             nautilusform.MdiParent = this;
             nautilusform.Show();
         }
+
+        private void beaconToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Beacon beacon = new Beacon();
+            beacon.MdiParent = this;
+            beacon.Show();
+        }
     }
 }

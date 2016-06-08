@@ -52,6 +52,11 @@ namespace Nautilus
         {
             FillGridMod();
         }
+        //populates the datarid with the search terms
+        private void btnNautModSearch_Click(object sender, EventArgs e)
+        {
+            BuscarModificacion();
+        }
         /**********************************************************************************************************************************************/
         /*Modification part of the form*/
         //Cleans the modification part of the form
@@ -176,6 +181,7 @@ namespace Nautilus
             {
                 MessageBox.Show("Actualizado con Exito");
                 LimpiarModificacion();
+                FillGridMod();
             }
             else
             {
@@ -204,6 +210,16 @@ namespace Nautilus
             }
             dateNautMod.Text = ds.Tables[0].Rows[0]["Naut_Activation"].ToString();
         }
-     
+        //Function that populates the dgNautMod with the parameters on the searchbox
+        private void BuscarModificacion()
+        {
+            string condicion = txtNautModSearch.Text.Trim();
+            string sql = @"SELECT Naut_ID as Identificador, Naut_Name as Dispositivo, Naut_Status as Status FROM naut_devices WHERE " +
+                "Naut_ID LIKE '%" + condicion + "%' OR Naut_Name LIKE '%" + condicion + "%' OR Naut_Status LIKE '%" + condicion + "%'" ;
+
+            dgNautMod.DataSource = null;
+            dgNautMod.DataSource = DBManager.SelectForGrid(sql);
+        }
+        
     }
 }
