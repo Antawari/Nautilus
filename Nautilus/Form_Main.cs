@@ -47,7 +47,7 @@ namespace Nautilus
 
         private void beaconToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Beacon beacon = new Beacon();
+            frmBeacon beacon = new frmBeacon();
             beacon.MdiParent = this;
             beacon.Show();
         }

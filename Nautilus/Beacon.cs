@@ -8,10 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Maps.MapControl.WPF;
+using Microsoft.Maps.MapControl.WPF.Design;
+using System.Globalization;
 
 namespace Nautilus
 {
-    public partial class Beacon : Form
+    public partial class frmBeacon : Form
     {
         /// <summary>
         /// This Form will control and let you view the beacons of the nautilus
@@ -21,21 +23,28 @@ namespace Nautilus
 
 
         //Variables necessary for the beacon to work.
-        private string tempHTML;
+       
 
-        public Beacon()
+        LocationConverter locConverter = new LocationConverter();
+        public frmBeacon()
         {
             InitializeComponent();
+           
         }
 
         private void Beacon_Load(object sender, EventArgs e)
         {
             //webBeacon.Navigate(MapString.MapUrl("20.5698132", "-100.3073437", "14"));
+            IniciarMapa();
         }
 
-        private void elementHost1_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
+        private void IniciarMapa()
         {
+            mapa.NautMap.Center = new Location(20.612137, -100.4069873);
+            mapa.NautMap.ZoomLevel = 12;
 
         }
+
+      
     }
 }
