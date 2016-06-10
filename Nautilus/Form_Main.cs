@@ -51,5 +51,27 @@ namespace Nautilus
             beacon.MdiParent = this;
             beacon.Show();
         }
+
+        private void Form_Main_Load(object sender, EventArgs e)
+        {
+            
+      
+                MenuMain.Visible = false;
+                MenuMain.Enabled = false;
+                frmLogin loginForm = new frmLogin();
+                //loginForm.MdiParent = this;
+                loginForm.ShowDialog();
+
+              if (GlobalVariables.Login== true)
+                {
+
+                    MenuMain.Visible = true;
+                    MenuMain.Enabled = true;
+                }
+              
+            }
+            
+
+        
     }
 }

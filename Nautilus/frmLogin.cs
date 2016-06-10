@@ -33,6 +33,9 @@ namespace Nautilus
             if (login == true)
             {
                 MessageBox.Show("Congratulations you are logged in");
+                GlobalVariables.Usuario = _username;
+                GlobalVariables.Login = true;
+                this.Close();
             }
             else
             {
@@ -40,6 +43,7 @@ namespace Nautilus
                 txtLoginPassword.Text = "";
                 txtLoginUsername.Text = "";
                 txtLoginUsername.Focus();
+                GlobalVariables.Login = false;
             }
         }
 

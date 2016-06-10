@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.dgBeacon = new System.Windows.Forms.DataGridView();
-            this.myMap = new System.Windows.Forms.Integration.ElementHost();
-            this.mapa = new Nautilus.Map();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.map1 = new Nautilus.Map();
             ((System.ComponentModel.ISupportInitialize)(this.dgBeacon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -39,24 +39,24 @@
             this.dgBeacon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgBeacon.Location = new System.Drawing.Point(12, 13);
             this.dgBeacon.Name = "dgBeacon";
-            this.dgBeacon.Size = new System.Drawing.Size(192, 308);
+            this.dgBeacon.Size = new System.Drawing.Size(381, 571);
             this.dgBeacon.TabIndex = 1;
             // 
-            // myMap
+            // elementHost1
             // 
-            this.myMap.Location = new System.Drawing.Point(221, 13);
-            this.myMap.Name = "myMap";
-            this.myMap.Size = new System.Drawing.Size(626, 445);
-            this.myMap.TabIndex = 5;
-            this.myMap.Text = "elementHost1";
-            this.myMap.Child = this.mapa;
+            this.elementHost1.Location = new System.Drawing.Point(399, 13);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(636, 571);
+            this.elementHost1.TabIndex = 2;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this.map1;
             // 
             // frmBeacon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(859, 467);
-            this.Controls.Add(this.myMap);
+            this.ClientSize = new System.Drawing.Size(1047, 596);
+            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.dgBeacon);
             this.Name = "frmBeacon";
             this.Text = "Beacon";
@@ -68,7 +68,8 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dgBeacon;
-        private System.Windows.Forms.Integration.ElementHost myMap;
-        private Map mapa;
+        
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private Map map1;
     }
 }

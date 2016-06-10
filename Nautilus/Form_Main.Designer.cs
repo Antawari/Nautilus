@@ -115,6 +115,7 @@
             this.Name = "Form_Main";
             this.Text = "Nautilus";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form_Main_Load);
             this.MenuMain.ResumeLayout(false);
             this.MenuMain.PerformLayout();
             this.ResumeLayout(false);

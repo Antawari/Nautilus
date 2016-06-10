@@ -123,6 +123,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 266);
+            this.ControlBox = false;
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtLoginPassword);
@@ -131,8 +132,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
+            this.MinimizeBox = false;
             this.Name = "frmLogin";
-            this.Text = "Nautilus Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Login";
+            this.TopMost = true;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

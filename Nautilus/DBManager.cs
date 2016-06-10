@@ -380,6 +380,25 @@ namespace Nautilus
                 value = false;
                 return value;
             }
+
+        }
+        
+        //Function that retrieves Latitude and Longitude
+        public static long coordinates(string query)
+        {
+            long value = new long();
+            Iniciador();
+            MySqlCommand cmd = new MySqlCommand(query , _conn);
+            object result = cmd.ExecuteScalar();
+            if (result !=null)
+            {
+                value = Convert.ToInt64(result);
+            } else
+            {
+                value = 0;
+            }
+
+            return value;
         }
 
     }

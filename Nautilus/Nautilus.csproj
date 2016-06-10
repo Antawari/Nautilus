@@ -37,10 +37,6 @@
       <HintPath>..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Google.Maps, Version=0.13.21.37392, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\gmaps-api-net.0.13.21\lib\net\Google.Maps.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -133,10 +129,13 @@
     <Compile Include="frmUserManagement.Designer.cs">
       <DependentUpon>frmUserManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalVariables.cs" />
+    <Compile Include="KardexController.cs" />
     <Compile Include="MailValidator.cs" />
     <Compile Include="Map.xaml.cs">
       <DependentUpon>Map.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MapManager.cs" />
     <Compile Include="MapString.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

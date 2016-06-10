@@ -36,13 +36,27 @@ namespace Nautilus
         {
             //webBeacon.Navigate(MapString.MapUrl("20.5698132", "-100.3073437", "14"));
             IniciarMapa();
+            llenarGrid();
+
+            //Test of GlobalVariable Usuario
+            //MessageBox.Show(GlobalVariables.Usuario);
         }
 
         private void IniciarMapa()
         {
-            mapa.NautMap.Center = new Location(20.612137, -100.4069873);
-            mapa.NautMap.ZoomLevel = 12;
+           map1.NautMap.Center = new Location(20.612137, -100.4069873);
+           map1.NautMap.ZoomLevel = 12;
 
+        }
+
+
+        private void llenarGrid()
+        {
+
+            string sql = @"SELECT Naut_ID as Identificador, Naut_Name as Dispositivo, Naut_Status as Status FROM naut_devices ORDER BY Naut_ID";
+
+            dgBeacon.DataSource = null;
+            dgBeacon.DataSource = DBManager.SelectForGrid(sql);
         }
 
       
