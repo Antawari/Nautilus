@@ -12,7 +12,7 @@ namespace Nautilus
         private static string constructor;
         private static string constructorLoop;
         private static string constructorWhere;
-        private static string resultado;
+        
         private static int counter;
 
         //Constructor de sentencias SQL para el caso DELETE
@@ -20,7 +20,7 @@ namespace Nautilus
         {
 
             constructor = "DELETE FROM " + table + " WHERE " + condicional + ";";
-            resultado = constructor;
+            string resultado = constructor;
 
             return resultado;
         }
@@ -83,7 +83,7 @@ namespace Nautilus
             }
 
             //Concatenacion completa
-            resultado = constructor + constructorWhere;
+           string  resultado = constructor + constructorWhere;
 
             return resultado;
 

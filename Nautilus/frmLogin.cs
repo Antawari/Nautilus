@@ -22,7 +22,7 @@ namespace Nautilus
             * 
             * 
             */
-            //Login
+        //Login
         private void btnLogin_Click(object sender, EventArgs e)
         {
             bool login = new bool();
@@ -32,10 +32,28 @@ namespace Nautilus
 
             if (login == true)
             {
-                MessageBox.Show("Congratulations you are logged in");
+                //MessageBox.Show("Congratulations you are logged in");
                 GlobalVariables.Usuario = _username;
                 GlobalVariables.Login = true;
-                this.Close();
+                //Add to the Kardex Routine
+                string description = GlobalVariables.LoginOk;
+                //build the SQL query
+                string query = @"INSERT INTO naut_kardex (Kardex_Modulo,Kardex_Fecha,Kardex_Hora,Kardex_Usuario,Kardex_Descripcion) 
+VALUES 
+('Login-Module',curdate(), curtime(),'" +_username + "','" + description +"')";
+                // String to write in the LOG file
+                string LogText = @"El usuario: " + _username + " efectuo un login exitoso a la fecha/hora: " + DateTime.Now;
+                
+                if ( KardexController.Injector(query,LogText)== true)
+                {
+                    this.Close();
+                                                         
+                }
+                else
+                {
+                    MessageBox.Show("Error en el kardex.");
+                }
+                
             }
             else
             {
@@ -48,7 +66,7 @@ namespace Nautilus
         }
 
 
-            //Close the program
+        //Close the program
         private void btnCancel_Click(object sender, EventArgs e)
         {
             CloseProgram();

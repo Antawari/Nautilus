@@ -12,62 +12,79 @@ namespace Nautilus
 {
     public partial class frmUserManagement : Form
     {
-
+        /// <summary>
+        /// Sector 1
+        /// Variable and Constant declarations
+        /// </summary>
         public string Status;
         public string UserID;
         private string EliminarID;
+        /// <summary>
+        /// End of Sector 1
+        /// </summary>
 
+        /*************************************************************************************************************************/
+
+        /// <summary>
+        /// Sector 2
+        /// Controls and events
+        /// </summary>
         public frmUserManagement()
         {
             InitializeComponent();
         }
 
-
         //when the form loads
         private void frmUserManagement_Load(object sender, EventArgs e)
         {
             habilitarNU();
-            //GridFormat();
         }
 
         //Click on the new user tab
         private void tabNuevoUsuario_Click(object sender, EventArgs e)
         {
             habilitarNU();
-
         }
 
-        //habilitates the new user part of the form
-        private void habilitarNU()
+        // click on the modify user button
+        private void btnMUUsuario_Click(object sender, EventArgs e)
         {
-            gpNU.Enabled = true;
-            txtNUNombre.Focus();
-
+            UpdateUser();
         }
+        /// <summary>
+        /// End of Sector 2
+        /// </summary>
+        /***************************************************************************************************************************/
+
+
+        /// <summary>
+        /// Sector 3
+        /// Functions
+        /// </summary>
+        /// 
+
         //Enables the modify user part of the form
         private void habilitarMU()
         {
-
             gpMU.Enabled = true;
             cargarListMU();
             lstMUSeleccionU.Focus();
-
         }
+        // function that loads the information from the database
+        // into the modify user datagrid
         private void cargarListMU()
         {
-            //Rutina que carga la consulta select en la base de datos y
-            //extrae los datos de todos los usuarios para popular la lista
-            // Construir el select inicial para llenar el grid
+            // query construction
             string query = @"SELECT idusuarios as 'ID',Nombre,ApellidoP as 'Apellido Paterno', ApellidoM as 'Apellido Materno' from usuarios order by Nombre; ";
 
-            /////Revisar el codigo Lista
-
+            // assignation of data to the grid
+            // call from the DBManager          
             lstMUSeleccionU.DataSource = null;
             lstMUSeleccionU.DataSource = DBManager.SelectForGrid(query);
             lstMUSeleccionU.Columns[0].Visible = false;
-
         }
-
+        // function that assigns the variable status from the radio buttons 
+        // NOTE change from checkboxes to radio buttons
         private void StatusSelector()
         {
             //llenado de variable de status
@@ -80,23 +97,11 @@ namespace Nautilus
                 Status = "Inactivo";
             }
         }
-        private void chkNUActivo_Click(object sender, EventArgs e)
-        {
-            chkNUActivo.Checked = true;
-            chkNUInactivo.Checked = false;
-        }
 
-        private void chkNUInactivo_Click(object sender, EventArgs e)
-        {
-            chkNUInactivo.Checked = true;
-            chkNUActivo.Checked = false;
-        }
-
+        // function that checks the mail format
         private void txtNUMail_TextChanged(object sender, EventArgs e)
         {
             string mailCheck = txtNUMail.Text;
-
-
             bool _valido = MailValidator.EmailEsValido(mailCheck);
 
             if (_valido == true)
@@ -117,14 +122,13 @@ namespace Nautilus
             // Construir el select inicial para llenar el grid
             string query = @"SELECT idusuarios as 'ID',Nombre,ApellidoP as 'Apellido Paterno', ApellidoM as 'Apellido Materno' from usuarios order by Nombre; ";
 
-            /////Revisar el codigo Lista
-
+            // assignation of data
             lstMUSeleccionU.DataSource = null;
             lstMUSeleccionU.DataSource = DBManager.SelectForGrid(query);
             lstMUSeleccionU.Columns[0].Visible = false;
         }
 
-
+        // AQUI VOY /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //Funcion que llena todos los campos de el formulario que pertenecen a Modifica Usuario
         private void LlenadoMU()
@@ -205,7 +209,7 @@ namespace Nautilus
         }
 
 
-     
+
 
         private void btnEUEliminar_Click(object sender, EventArgs e)
         {
@@ -214,7 +218,7 @@ namespace Nautilus
             DBManager.deleteSQL(query);
         }
 
-    
+
 
         private void LlenadoEU()
         {
@@ -296,13 +300,35 @@ namespace Nautilus
 
 
             //MessageBox.Show(query);
-            DBManager.Insertar(query);
+            if (DBManager.Insertar(query) == true)
+            {
+                //Kardex injection
+                //Extract the variables
+                string _username = GlobalVariables.Usuario;
+                string description = "Se efectuo una insercion de usuario en el modulo de usuarios. El usuario insertado fue: " + userID;
+                //build the SQL query
+                string kardexQuery = @"INSERT INTO naut_kardex (Kardex_Modulo,Kardex_Fecha,Kardex_Hora,Kardex_Usuario,Kardex_Descripcion) 
+VALUES 
+('User_Module',curdate(), curtime(),'" + _username + "','" + description + "')";
+                // String to write in the LOG file
+                string LogText = @"El usuario: " + _username + " Inserto al usuario: " + userID + "  a la fecha/hora: " + DateTime.Now;
 
-        }
-        //Update Method For the Button
-        private void btnMUGuardar_Click_1(object sender, EventArgs e)
-        {
-            UpdateUser();
+                if (KardexController.Injector(kardexQuery, LogText) == true)
+                {
+                    MessageBox.Show("Usuario insertado con exito");
+                    //Falta generar la rutina para limpiar el formulario
+                    //LimpiarAU();
+
+                }
+                else
+                {
+                    MessageBox.Show("Error en el kardex.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Hubo un error en la insercion del usuario");
+            }
         }
 
 
@@ -312,42 +338,81 @@ namespace Nautilus
             //declaracion y llenado de variables
             string _table = "usuarios"; //Esta tabla es estatica para la rutina
 
-            //Llenado de la variable _values
-            string[,,] _values =
-           {
-                { { "UserID", txtMUUsuario.Text, "string" } },
-                { { "Pass", txtMUPassword.Text,"string" } },
-                { {"Nombre",txtMUNombre.Text ,"string"} },
-                { {"ApellidoP",txtMUApellidoP.Text ,"string" } },
-                { {"ApellidoM",txtMUApellidoM.Text ,"string" } },
-                { {"Direccion1",txtMUDireccion.Text,"string" } },
-                { {"Direccion2",txtMUDireccion2.Text,"string" } },
-                { {"Telefono1",txtMUTel1.Text ,"string"} },
-                { {"Telefono2",txtMUTel2.Text ,"string" } },
-                { {"Mail",txtMUMail.Text ,"string" } },
-                { {"Status",Status ,"string" } },
-                { {"rol",cmbMURol.Text ,"string" } }
-            };
 
-
+            //Values Variable fill
+            string _values = "UserID='" + txtMUUsuario.Text.Trim() + "'," +
+                "Pass='" + txtMUPassword.Text + "'," +
+                "Nombre='" + txtMUNombre.Text + "'," +
+                "ApellidoP='" + txtMUApellidoP.Text + "'," +
+                "ApellidoM='" + txtMUApellidoM.Text + "'," +
+                 "Direccion1='" + txtMUDireccion.Text + "'," +
+                  "Direccion2='" + txtMUDireccion2.Text + "'," +
+                "Telefono1='" + txtMUTel1.Text + "'," +
+                "Telefono2='" + txtMUTel2.Text + "'," +
+                "Mail='" + txtMUMail.Text + "'," +
+                "Status='" + Status + "'," +
+                "Rol='" + cmbMURol.Text + "' ";
 
             //llenamos la variable para extraer el id
             string id = lstMUSeleccionU.CurrentRow.Cells[0].Value.ToString();
-            string[,,] _where = { { { "idusuarios", id, "integer" } } };
+            string _where = "WHERE idusuarios='" + id + "'";
 
             //Sacamos la sentencia del SQL de la funcion UpdateSQl
-            string updateQuery = QueryBuilder.UpdateSQL(_table, _values, _where);
+            string updateQuery = SQLBuilder.updateSQL(_table, _values, _where);
 
-            DBManager.Actualizar(updateQuery);
+            if (DBManager.Actualizar(updateQuery) == true)
+            {
+                MessageBox.Show("Usuario actualizado con exito");
+            }
+            else
+            {
+                MessageBox.Show("Actualizacion de usuario fallida");
+            }
+
+            _values = null;
 
             //Fin de la rutina de actualizaciones
         }
 
-        
+
 
         private void tabEliminarUsuario_Enter(object sender, EventArgs e)
         {
             LlenadoEU();
         }
+
+
+
+        //habilitates the new user part of the form
+        private void habilitarNU()
+        {
+            gpNU.Enabled = true;
+            txtNUNombre.Focus();
+        }
+
+
     }
 }
+
+// REPOSITORY AND DISCONTINUED CODE
+
+/*
+        * Discontinued Code
+       //Llenado de la variable _values
+       string[,,] _values =
+      {
+           { { "UserID", txtMUUsuario.Text, "string" } },
+           { { "Pass", txtMUPassword.Text,"string" } },
+           { {"Nombre",txtMUNombre.Text ,"string"} },
+           { {"ApellidoP",txtMUApellidoP.Text ,"string" } },
+           { {"ApellidoM",txtMUApellidoM.Text ,"string" } },
+           { {"Direccion1",txtMUDireccion.Text,"string" } },
+           { {"Direccion2",txtMUDireccion2.Text,"string" } },
+           { {"Telefono1",txtMUTel1.Text ,"string"} },
+           { {"Telefono2",txtMUTel2.Text ,"string" } },
+           { {"Mail",txtMUMail.Text ,"string" } },
+           { {"Status",Status ,"string" } },
+           { {"rol",cmbMURol.Text ,"string" } }
+       };
+           discontinued CODE used in query builder a discontinued class
+        */

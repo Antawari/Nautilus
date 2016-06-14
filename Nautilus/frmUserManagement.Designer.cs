@@ -483,6 +483,7 @@
             this.btnMUUsuario.TabIndex = 87;
             this.btnMUUsuario.Text = "Guardar";
             this.btnMUUsuario.UseVisualStyleBackColor = true;
+            this.btnMUUsuario.Click += new System.EventHandler(this.btnMUUsuario_Click);
             // 
             // txtMUPassword
             // 

@@ -20,6 +20,12 @@ namespace Nautilus
         /// </summary>
         static bool _login;
 
+        /// <summary>
+        /// Constants group
+        /// </summary>
+
+        //Login description constant
+        public const string LoginOk = @"Login efectuado con exito";
 
         //Usuario Handle
         public static string Usuario
