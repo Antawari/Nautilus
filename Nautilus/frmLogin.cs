@@ -86,5 +86,22 @@ VALUES
                 System.Environment.Exit(1);
             }
         }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            txtLoginUsername.Focus();
+            this.AcceptButton = btnLogin;
+            this.CancelButton = btnCancel;
+        }
+
+        private void txtLoginUsername_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtLoginPassword_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }

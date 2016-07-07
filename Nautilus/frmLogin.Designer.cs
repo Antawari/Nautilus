@@ -85,7 +85,8 @@
             this.txtLoginUsername.Location = new System.Drawing.Point(266, 76);
             this.txtLoginUsername.Name = "txtLoginUsername";
             this.txtLoginUsername.Size = new System.Drawing.Size(314, 30);
-            this.txtLoginUsername.TabIndex = 4;
+            this.txtLoginUsername.TabIndex = 0;
+            this.txtLoginUsername.TextChanged += new System.EventHandler(this.txtLoginUsername_TextChanged);
             // 
             // txtLoginPassword
             // 
@@ -93,8 +94,9 @@
             this.txtLoginPassword.Location = new System.Drawing.Point(266, 137);
             this.txtLoginPassword.Name = "txtLoginPassword";
             this.txtLoginPassword.Size = new System.Drawing.Size(314, 30);
-            this.txtLoginPassword.TabIndex = 5;
+            this.txtLoginPassword.TabIndex = 1;
             this.txtLoginPassword.UseSystemPasswordChar = true;
+            this.txtLoginPassword.TextChanged += new System.EventHandler(this.txtLoginPassword_TextChanged);
             // 
             // btnLogin
             // 
@@ -102,7 +104,7 @@
             this.btnLogin.Location = new System.Drawing.Point(462, 189);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(117, 35);
-            this.btnLogin.TabIndex = 6;
+            this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Acceder";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -113,7 +115,7 @@
             this.btnCancel.Location = new System.Drawing.Point(266, 189);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(117, 35);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Salir";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -135,6 +137,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Login";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -28,7 +28,7 @@ namespace Nautilus
         public static  bool Injector(string query, string text)
         {
             // Condition that will insert both    
-            if(LogFileManager(text) == true &&  DBManager.Insertar(query) == true )
+            if(LogFileManager(text) == true &&  DBManager.Insertar(query) == true )//condition that checks the kardex operation and returns OK
             {
                 return true;
             }

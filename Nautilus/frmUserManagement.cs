@@ -16,7 +16,8 @@ namespace Nautilus
         /// Sector 1
         /// Variable and Constant declarations
         /// </summary>
-        public string Status;
+        private static string Status;
+        private static string StatusMU;
         public string UserID;
         private string EliminarID;
         /// <summary>
@@ -50,6 +51,32 @@ namespace Nautilus
         private void btnMUUsuario_Click(object sender, EventArgs e)
         {
             UpdateUser();
+            FillMUUserGrid();
+
+        }
+        // this function fills the the fields of the delete user
+        private void tabEliminarUsuario_Enter(object sender, EventArgs e)
+        {
+            LlenadoEU();
+        }
+        // when the txt field of the new user part of the forms changes
+        private void txtNUMail_TextChanged(object sender, EventArgs e)
+        {
+            mailOK();
+        }
+        // When you click on the modify user tab
+        private void tabModificarUsuario_Enter(object sender, EventArgs e)
+        {
+            FillMUUserGrid();
+        }
+        private void lstMUSeleccionU_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            LlenadoMU();
+        }
+
+        private void btnNUCancelar_Click(object sender, EventArgs e)
+        {
+
         }
         /// <summary>
         /// End of Sector 2
@@ -88,7 +115,7 @@ namespace Nautilus
         private void StatusSelector()
         {
             //llenado de variable de status
-            if (chkNUActivo.Checked == true)
+            if (rbNUActivo.Checked == true)
             {
                 Status = "Activo";
             }
@@ -96,10 +123,19 @@ namespace Nautilus
             {
                 Status = "Inactivo";
             }
+
+            if (rbMUActivo.Checked == true)
+            {
+                StatusMU = "Activo";
+            }
+            else
+            {
+                StatusMU = "Inactivo";
+            }
         }
 
         // function that checks the mail format
-        private void txtNUMail_TextChanged(object sender, EventArgs e)
+        private void mailOK()
         {
             string mailCheck = txtNUMail.Text;
             bool _valido = MailValidator.EmailEsValido(mailCheck);
@@ -112,25 +148,9 @@ namespace Nautilus
             {
                 lblMailCheck.Text = "Mail Incorrecto";
             }
-
         }
 
-
-
-        private void tabModificarUsuario_Enter(object sender, EventArgs e)
-        {
-            // Construir el select inicial para llenar el grid
-            string query = @"SELECT idusuarios as 'ID',Nombre,ApellidoP as 'Apellido Paterno', ApellidoM as 'Apellido Materno' from usuarios order by Nombre; ";
-
-            // assignation of data
-            lstMUSeleccionU.DataSource = null;
-            lstMUSeleccionU.DataSource = DBManager.SelectForGrid(query);
-            lstMUSeleccionU.Columns[0].Visible = false;
-        }
-
-        // AQUI VOY /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //Funcion que llena todos los campos de el formulario que pertenecen a Modifica Usuario
+        // Function that fills up the text fields in the modify user part of the form
         private void LlenadoMU()
         {
             //Para llenar los campos a modificar, hacemos una busqueda con select.
@@ -158,13 +178,13 @@ namespace Nautilus
 
             if (status == "Activo")
             {
-                chkMUActivo.Checked = true;
-                chkMUInactivo.Checked = false;
+                rbMUActivo.Checked = true;
+                rbMUInactivo.Checked = false;
             }
             else
             {
-                chkMUInactivo.Checked = true;
-                chkMUActivo.Checked = false;
+                rbMUInactivo.Checked = true;
+                rbMUActivo.Checked = false;
             }
 
             cmbMURol.Text = ds.Tables[0].Rows[0]["rol"].ToString();
@@ -173,15 +193,6 @@ namespace Nautilus
             ds.Dispose();
         }
 
-        private void lstMUSeleccionU_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            LlenadoMU();
-        }
-
-        private void btnNUCancelar_Click(object sender, EventArgs e)
-        {
-
-        }
 
         //funcion que limpia todos los textos de modificar usuario.
         private void LimpiarMU()
@@ -197,8 +208,8 @@ namespace Nautilus
             txtMUTel1.Text = "";
             txtMUTel2.Text = "";
             txtMUMail.Text = "";
-            chkMUActivo.Checked = false;
-            chkMUInactivo.Checked = false;
+            rbMUActivo.Checked = false;
+            rbMUInactivo.Checked = false;
             cmbMURol.Text = "";
         }
 
@@ -207,8 +218,6 @@ namespace Nautilus
             LimpiarMU();
             txtMUBuscar.Focus();
         }
-
-
 
 
         private void btnEUEliminar_Click(object sender, EventArgs e)
@@ -226,21 +235,17 @@ namespace Nautilus
             string query = @"SELECT idusuarios as 'ID',Nombre,ApellidoP as 'Apellido Paterno', ApellidoM as 'Apellido Materno' from usuarios order by Nombre; ";
 
             /////Revisar el codigo Lista
-
             lstEUlista.DataSource = null;
             lstEUlista.DataSource = DBManager.SelectForGrid(query);
             lstEUlista.Columns[0].Visible = false;
-
         }
 
         private void seleccionEU()
         {
             EliminarID = lstEUlista.CurrentRow.Cells[0].Value.ToString();
-
             string nombre = lstEUlista.CurrentRow.Cells[1].Value.ToString();
             string apellidoP = lstEUlista.CurrentRow.Cells[2].Value.ToString();
             string apellidoM = lstEUlista.CurrentRow.Cells[3].Value.ToString();
-
             lblEUSelected.Text = nombre + " " + apellidoP + " " + apellidoM;
         }
 
@@ -248,12 +253,10 @@ namespace Nautilus
         {
             seleccionEU();
         }
-
         private void lstEUlista_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             seleccionEU();
         }
-
         private void btnNUGuardar_Click_1(object sender, EventArgs e)
         {
             //Variables para la construccion de la sentencia
@@ -268,9 +271,7 @@ namespace Nautilus
             string Telefono1;
             string Telefono2;
             string mail;
-
             string rol;
-
             string query;
 
             //Constructor de sentencia
@@ -298,8 +299,6 @@ namespace Nautilus
 "('" + userID + "','" + password + "','" + Nombre + "','" + ApellidoP + "','" + ApellidoM + "','" + Direccion1 + "','"
 + Direccion2 + "','" + Telefono1 + "','" + Telefono2 + "','" + mail + "','" + Status + "','" + rol + "');";
 
-
-            //MessageBox.Show(query);
             if (DBManager.Insertar(query) == true)
             {
                 //Kardex injection
@@ -310,15 +309,14 @@ namespace Nautilus
                 string kardexQuery = @"INSERT INTO naut_kardex (Kardex_Modulo,Kardex_Fecha,Kardex_Hora,Kardex_Usuario,Kardex_Descripcion) 
 VALUES 
 ('User_Module',curdate(), curtime(),'" + _username + "','" + description + "')";
-                // String to write in the LOG file
+                // String to write in the KARDEX file
                 string LogText = @"El usuario: " + _username + " Inserto al usuario: " + userID + "  a la fecha/hora: " + DateTime.Now;
 
                 if (KardexController.Injector(kardexQuery, LogText) == true)
                 {
                     MessageBox.Show("Usuario insertado con exito");
-                    //Falta generar la rutina para limpiar el formulario
-                    //LimpiarAU();
-
+                    CleanGroup(gpNU);  //Clear the whole tab using the groupcontrol that surrounds all the controls
+                    txtNUUsuario.Focus();
                 }
                 else
                 {
@@ -335,11 +333,11 @@ VALUES
         //Update user method
         private void UpdateUser()
         {
+            //status selector
+            StatusSelector();
             //declaracion y llenado de variables
             string _table = "usuarios"; //Esta tabla es estatica para la rutina
-
-
-            //Values Variable fill
+                                        //Values Variable fill
             string _values = "UserID='" + txtMUUsuario.Text.Trim() + "'," +
                 "Pass='" + txtMUPassword.Text + "'," +
                 "Nombre='" + txtMUNombre.Text + "'," +
@@ -350,19 +348,21 @@ VALUES
                 "Telefono1='" + txtMUTel1.Text + "'," +
                 "Telefono2='" + txtMUTel2.Text + "'," +
                 "Mail='" + txtMUMail.Text + "'," +
-                "Status='" + Status + "'," +
+                "Status='" + StatusMU + "'," +
                 "Rol='" + cmbMURol.Text + "' ";
+
 
             //llenamos la variable para extraer el id
             string id = lstMUSeleccionU.CurrentRow.Cells[0].Value.ToString();
             string _where = "WHERE idusuarios='" + id + "'";
-
             //Sacamos la sentencia del SQL de la funcion UpdateSQl
             string updateQuery = SQLBuilder.updateSQL(_table, _values, _where);
 
             if (DBManager.Actualizar(updateQuery) == true)
             {
                 MessageBox.Show("Usuario actualizado con exito");
+                CleanGroup(gpMU);
+
             }
             else
             {
@@ -376,20 +376,43 @@ VALUES
 
 
 
-        private void tabEliminarUsuario_Enter(object sender, EventArgs e)
-        {
-            LlenadoEU();
-        }
-
-
-
         //habilitates the new user part of the form
         private void habilitarNU()
         {
             gpNU.Enabled = true;
             txtNUNombre.Focus();
         }
+        private void FillMUUserGrid()
+        {
+            // Construir el select inicial para llenar el grid
+            string query = @"SELECT idusuarios as 'ID',Nombre,ApellidoP as 'Apellido Paterno', ApellidoM as 'Apellido Materno' from usuarios order by Nombre; ";
 
+            // assignation of data
+            lstMUSeleccionU.DataSource = null;
+            lstMUSeleccionU.DataSource = DBManager.SelectForGrid(query);
+            lstMUSeleccionU.Columns[0].Visible = false;
+        }
+
+        private void CleanGroup(Control con)
+        {
+            foreach (Control c in con.Controls)
+            {
+                if (c is TextBox)
+                {
+                    ((TextBox)c).Clear();
+                }
+                if (c is RadioButton)
+                {
+                    ((RadioButton)c).Checked = false;
+                }
+                if (c is ComboBox)
+                {
+                    ((ComboBox)c).Text = "";
+                }
+
+
+            }
+        }
 
     }
 }

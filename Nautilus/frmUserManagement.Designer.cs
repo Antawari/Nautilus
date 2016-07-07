@@ -35,8 +35,6 @@
             this.btnNUCancelar = new System.Windows.Forms.Button();
             this.btnNUGuardar = new System.Windows.Forms.Button();
             this.cmbNURol = new System.Windows.Forms.ComboBox();
-            this.chkNUInactivo = new System.Windows.Forms.CheckBox();
-            this.chkNUActivo = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtNUMail = new System.Windows.Forms.TextBox();
@@ -73,8 +71,6 @@
             this.btnMUBuscar = new System.Windows.Forms.Button();
             this.txtMUBuscar = new System.Windows.Forms.TextBox();
             this.btnMUCancelar = new System.Windows.Forms.Button();
-            this.chkMUInactivo = new System.Windows.Forms.CheckBox();
-            this.chkMUActivo = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.txtMUMail = new System.Windows.Forms.TextBox();
@@ -102,6 +98,10 @@
             this.label24 = new System.Windows.Forms.Label();
             this.btnEUBuscar = new System.Windows.Forms.Button();
             this.txtEUBuscarU = new System.Windows.Forms.TextBox();
+            this.rbNUActivo = new System.Windows.Forms.RadioButton();
+            this.rbNUInactivo = new System.Windows.Forms.RadioButton();
+            this.rbMUActivo = new System.Windows.Forms.RadioButton();
+            this.rbMUInactivo = new System.Windows.Forms.RadioButton();
             this.tabUserManagement.SuspendLayout();
             this.tabNuevoUsuario.SuspendLayout();
             this.gpNU.SuspendLayout();
@@ -137,12 +137,12 @@
             // 
             // gpNU
             // 
+            this.gpNU.Controls.Add(this.rbNUInactivo);
+            this.gpNU.Controls.Add(this.rbNUActivo);
             this.gpNU.Controls.Add(this.lblMailCheck);
             this.gpNU.Controls.Add(this.btnNUCancelar);
             this.gpNU.Controls.Add(this.btnNUGuardar);
             this.gpNU.Controls.Add(this.cmbNURol);
-            this.gpNU.Controls.Add(this.chkNUInactivo);
-            this.gpNU.Controls.Add(this.chkNUActivo);
             this.gpNU.Controls.Add(this.label7);
             this.gpNU.Controls.Add(this.label8);
             this.gpNU.Controls.Add(this.txtNUMail);
@@ -211,28 +211,6 @@
             this.cmbNURol.Name = "cmbNURol";
             this.cmbNURol.Size = new System.Drawing.Size(350, 21);
             this.cmbNURol.TabIndex = 14;
-            // 
-            // chkNUInactivo
-            // 
-            this.chkNUInactivo.AutoSize = true;
-            this.chkNUInactivo.Location = new System.Drawing.Point(158, 311);
-            this.chkNUInactivo.Name = "chkNUInactivo";
-            this.chkNUInactivo.Size = new System.Drawing.Size(64, 17);
-            this.chkNUInactivo.TabIndex = 13;
-            this.chkNUInactivo.Text = "Inactivo";
-            this.chkNUInactivo.UseVisualStyleBackColor = true;
-            // 
-            // chkNUActivo
-            // 
-            this.chkNUActivo.AutoSize = true;
-            this.chkNUActivo.Checked = true;
-            this.chkNUActivo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkNUActivo.Location = new System.Drawing.Point(96, 311);
-            this.chkNUActivo.Name = "chkNUActivo";
-            this.chkNUActivo.Size = new System.Drawing.Size(56, 17);
-            this.chkNUActivo.TabIndex = 12;
-            this.chkNUActivo.Text = "Activo";
-            this.chkNUActivo.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -437,6 +415,8 @@
             // 
             // gpMU
             // 
+            this.gpMU.Controls.Add(this.rbMUInactivo);
+            this.gpMU.Controls.Add(this.rbMUActivo);
             this.gpMU.Controls.Add(this.btnMUUsuario);
             this.gpMU.Controls.Add(this.txtMUPassword);
             this.gpMU.Controls.Add(this.label28);
@@ -448,8 +428,6 @@
             this.gpMU.Controls.Add(this.btnMUBuscar);
             this.gpMU.Controls.Add(this.txtMUBuscar);
             this.gpMU.Controls.Add(this.btnMUCancelar);
-            this.gpMU.Controls.Add(this.chkMUInactivo);
-            this.gpMU.Controls.Add(this.chkMUActivo);
             this.gpMU.Controls.Add(this.label12);
             this.gpMU.Controls.Add(this.label13);
             this.gpMU.Controls.Add(this.txtMUMail);
@@ -532,6 +510,11 @@
             // cmbMURol
             // 
             this.cmbMURol.FormattingEnabled = true;
+            this.cmbMURol.Items.AddRange(new object[] {
+            "1 - Usuario",
+            "2 - Editor",
+            "3 - Administrador",
+            "4 - Root"});
             this.cmbMURol.Location = new System.Drawing.Point(94, 508);
             this.cmbMURol.Name = "cmbMURol";
             this.cmbMURol.Size = new System.Drawing.Size(349, 21);
@@ -571,26 +554,6 @@
             this.btnMUCancelar.Text = "Cancelar";
             this.btnMUCancelar.UseVisualStyleBackColor = true;
             this.btnMUCancelar.Click += new System.EventHandler(this.btnNUCancelar_Click);
-            // 
-            // chkMUInactivo
-            // 
-            this.chkMUInactivo.AutoSize = true;
-            this.chkMUInactivo.Location = new System.Drawing.Point(156, 471);
-            this.chkMUInactivo.Name = "chkMUInactivo";
-            this.chkMUInactivo.Size = new System.Drawing.Size(64, 17);
-            this.chkMUInactivo.TabIndex = 31;
-            this.chkMUInactivo.Text = "Inactivo";
-            this.chkMUInactivo.UseVisualStyleBackColor = true;
-            // 
-            // chkMUActivo
-            // 
-            this.chkMUActivo.AutoSize = true;
-            this.chkMUActivo.Location = new System.Drawing.Point(94, 471);
-            this.chkMUActivo.Name = "chkMUActivo";
-            this.chkMUActivo.Size = new System.Drawing.Size(56, 17);
-            this.chkMUActivo.TabIndex = 30;
-            this.chkMUActivo.Text = "Activo";
-            this.chkMUActivo.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
@@ -824,6 +787,50 @@
             this.txtEUBuscarU.Size = new System.Drawing.Size(382, 20);
             this.txtEUBuscarU.TabIndex = 35;
             // 
+            // rbNUActivo
+            // 
+            this.rbNUActivo.AutoSize = true;
+            this.rbNUActivo.Location = new System.Drawing.Point(97, 311);
+            this.rbNUActivo.Name = "rbNUActivo";
+            this.rbNUActivo.Size = new System.Drawing.Size(55, 17);
+            this.rbNUActivo.TabIndex = 44;
+            this.rbNUActivo.TabStop = true;
+            this.rbNUActivo.Text = "Activo";
+            this.rbNUActivo.UseVisualStyleBackColor = true;
+            // 
+            // rbNUInactivo
+            // 
+            this.rbNUInactivo.AutoSize = true;
+            this.rbNUInactivo.Location = new System.Drawing.Point(158, 311);
+            this.rbNUInactivo.Name = "rbNUInactivo";
+            this.rbNUInactivo.Size = new System.Drawing.Size(63, 17);
+            this.rbNUInactivo.TabIndex = 45;
+            this.rbNUInactivo.TabStop = true;
+            this.rbNUInactivo.Text = "Inactivo";
+            this.rbNUInactivo.UseVisualStyleBackColor = true;
+            // 
+            // rbMUActivo
+            // 
+            this.rbMUActivo.AutoSize = true;
+            this.rbMUActivo.Location = new System.Drawing.Point(94, 471);
+            this.rbMUActivo.Name = "rbMUActivo";
+            this.rbMUActivo.Size = new System.Drawing.Size(55, 17);
+            this.rbMUActivo.TabIndex = 88;
+            this.rbMUActivo.TabStop = true;
+            this.rbMUActivo.Text = "Activo";
+            this.rbMUActivo.UseVisualStyleBackColor = true;
+            // 
+            // rbMUInactivo
+            // 
+            this.rbMUInactivo.AutoSize = true;
+            this.rbMUInactivo.Location = new System.Drawing.Point(155, 471);
+            this.rbMUInactivo.Name = "rbMUInactivo";
+            this.rbMUInactivo.Size = new System.Drawing.Size(63, 17);
+            this.rbMUInactivo.TabIndex = 89;
+            this.rbMUInactivo.TabStop = true;
+            this.rbMUInactivo.Text = "Inactivo";
+            this.rbMUInactivo.UseVisualStyleBackColor = true;
+            // 
             // frmUserManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -858,8 +865,6 @@
         private System.Windows.Forms.Button btnNUCancelar;
         private System.Windows.Forms.Button btnNUGuardar;
         private System.Windows.Forms.ComboBox cmbNURol;
-        private System.Windows.Forms.CheckBox chkNUInactivo;
-        private System.Windows.Forms.CheckBox chkNUActivo;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtNUMail;
@@ -895,9 +900,6 @@
         private System.Windows.Forms.Button btnMUBuscar;
         private System.Windows.Forms.TextBox txtMUBuscar;
         private System.Windows.Forms.Button btnMUCancelar;
-        
-        private System.Windows.Forms.CheckBox chkMUInactivo;
-        private System.Windows.Forms.CheckBox chkMUActivo;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtMUMail;
@@ -926,5 +928,9 @@
         private System.Windows.Forms.Button btnEUBuscar;
         private System.Windows.Forms.TextBox txtEUBuscarU;
         private System.Windows.Forms.Button btnMUUsuario;
+        private System.Windows.Forms.RadioButton rbNUInactivo;
+        private System.Windows.Forms.RadioButton rbNUActivo;
+        private System.Windows.Forms.RadioButton rbMUInactivo;
+        private System.Windows.Forms.RadioButton rbMUActivo;
     }
 }
