@@ -28,7 +28,7 @@ namespace Nautilus
         public static  bool Injector(string query, string text)
         {
             // Condition that will insert both    
-            if(LogFileManager(text) == true &&  DBManager.Insertar(query) == true )//condition that checks the kardex operation and returns OK
+            if(LogFileManager(text) == true &&  DBManager.Insertar(query) == true ) //condition that checks the kardex operation and returns OK
             {
                 return true;
             }
@@ -54,11 +54,7 @@ namespace Nautilus
             string dirPath = @"D:\Nautilus\Log\";
             string fileName = "log"+ date + ".txt";
             string path = System.IO.Path.Combine(dirPath, fileName);
-
-
-
-
-
+            
             //Error handling and try
             try
             {

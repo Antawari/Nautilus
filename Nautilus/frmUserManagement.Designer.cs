@@ -31,6 +31,8 @@
             this.tabUserManagement = new System.Windows.Forms.TabControl();
             this.tabNuevoUsuario = new System.Windows.Forms.TabPage();
             this.gpNU = new System.Windows.Forms.GroupBox();
+            this.rbNUInactivo = new System.Windows.Forms.RadioButton();
+            this.rbNUActivo = new System.Windows.Forms.RadioButton();
             this.lblMailCheck = new System.Windows.Forms.Label();
             this.btnNUCancelar = new System.Windows.Forms.Button();
             this.btnNUGuardar = new System.Windows.Forms.Button();
@@ -60,6 +62,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabModificarUsuario = new System.Windows.Forms.TabPage();
             this.gpMU = new System.Windows.Forms.GroupBox();
+            this.rbMUInactivo = new System.Windows.Forms.RadioButton();
+            this.rbMUActivo = new System.Windows.Forms.RadioButton();
             this.btnMUUsuario = new System.Windows.Forms.Button();
             this.txtMUPassword = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
@@ -98,10 +102,6 @@
             this.label24 = new System.Windows.Forms.Label();
             this.btnEUBuscar = new System.Windows.Forms.Button();
             this.txtEUBuscarU = new System.Windows.Forms.TextBox();
-            this.rbNUActivo = new System.Windows.Forms.RadioButton();
-            this.rbNUInactivo = new System.Windows.Forms.RadioButton();
-            this.rbMUActivo = new System.Windows.Forms.RadioButton();
-            this.rbMUInactivo = new System.Windows.Forms.RadioButton();
             this.tabUserManagement.SuspendLayout();
             this.tabNuevoUsuario.SuspendLayout();
             this.gpNU.SuspendLayout();
@@ -171,6 +171,28 @@
             this.gpNU.Size = new System.Drawing.Size(447, 487);
             this.gpNU.TabIndex = 20;
             this.gpNU.TabStop = false;
+            // 
+            // rbNUInactivo
+            // 
+            this.rbNUInactivo.AutoSize = true;
+            this.rbNUInactivo.Location = new System.Drawing.Point(158, 311);
+            this.rbNUInactivo.Name = "rbNUInactivo";
+            this.rbNUInactivo.Size = new System.Drawing.Size(63, 17);
+            this.rbNUInactivo.TabIndex = 45;
+            this.rbNUInactivo.TabStop = true;
+            this.rbNUInactivo.Text = "Inactivo";
+            this.rbNUInactivo.UseVisualStyleBackColor = true;
+            // 
+            // rbNUActivo
+            // 
+            this.rbNUActivo.AutoSize = true;
+            this.rbNUActivo.Location = new System.Drawing.Point(97, 311);
+            this.rbNUActivo.Name = "rbNUActivo";
+            this.rbNUActivo.Size = new System.Drawing.Size(55, 17);
+            this.rbNUActivo.TabIndex = 44;
+            this.rbNUActivo.TabStop = true;
+            this.rbNUActivo.Text = "Activo";
+            this.rbNUActivo.UseVisualStyleBackColor = true;
             // 
             // lblMailCheck
             // 
@@ -453,6 +475,28 @@
             this.gpMU.TabIndex = 0;
             this.gpMU.TabStop = false;
             // 
+            // rbMUInactivo
+            // 
+            this.rbMUInactivo.AutoSize = true;
+            this.rbMUInactivo.Location = new System.Drawing.Point(155, 471);
+            this.rbMUInactivo.Name = "rbMUInactivo";
+            this.rbMUInactivo.Size = new System.Drawing.Size(63, 17);
+            this.rbMUInactivo.TabIndex = 89;
+            this.rbMUInactivo.TabStop = true;
+            this.rbMUInactivo.Text = "Inactivo";
+            this.rbMUInactivo.UseVisualStyleBackColor = true;
+            // 
+            // rbMUActivo
+            // 
+            this.rbMUActivo.AutoSize = true;
+            this.rbMUActivo.Location = new System.Drawing.Point(94, 471);
+            this.rbMUActivo.Name = "rbMUActivo";
+            this.rbMUActivo.Size = new System.Drawing.Size(55, 17);
+            this.rbMUActivo.TabIndex = 88;
+            this.rbMUActivo.TabStop = true;
+            this.rbMUActivo.Text = "Activo";
+            this.rbMUActivo.UseVisualStyleBackColor = true;
+            // 
             // btnMUUsuario
             // 
             this.btnMUUsuario.Location = new System.Drawing.Point(369, 545);
@@ -730,7 +774,7 @@
             // lblEUSelected
             // 
             this.lblEUSelected.AutoSize = true;
-            this.lblEUSelected.Location = new System.Drawing.Point(13, 455);
+            this.lblEUSelected.Location = new System.Drawing.Point(10, 509);
             this.lblEUSelected.Name = "lblEUSelected";
             this.lblEUSelected.Size = new System.Drawing.Size(0, 13);
             this.lblEUSelected.TabIndex = 60;
@@ -738,15 +782,15 @@
             // lstEUlista
             // 
             this.lstEUlista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.lstEUlista.Location = new System.Drawing.Point(13, 66);
+            this.lstEUlista.Location = new System.Drawing.Point(13, 65);
             this.lstEUlista.Name = "lstEUlista";
-            this.lstEUlista.Size = new System.Drawing.Size(437, 363);
+            this.lstEUlista.Size = new System.Drawing.Size(454, 414);
             this.lstEUlista.TabIndex = 59;
-            this.lstEUlista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lstEUlista_CellContentClick);
+            this.lstEUlista.Click += new System.EventHandler(this.lstEUlista_Click);
             // 
             // btnEUCancelar
             // 
-            this.btnEUCancelar.Location = new System.Drawing.Point(294, 558);
+            this.btnEUCancelar.Location = new System.Drawing.Point(311, 558);
             this.btnEUCancelar.Name = "btnEUCancelar";
             this.btnEUCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnEUCancelar.TabIndex = 38;
@@ -755,12 +799,13 @@
             // 
             // btnEUEliminar
             // 
-            this.btnEUEliminar.Location = new System.Drawing.Point(375, 558);
+            this.btnEUEliminar.Location = new System.Drawing.Point(392, 558);
             this.btnEUEliminar.Name = "btnEUEliminar";
             this.btnEUEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEUEliminar.TabIndex = 39;
             this.btnEUEliminar.Text = "Eliminar";
             this.btnEUEliminar.UseVisualStyleBackColor = true;
+            this.btnEUEliminar.Click += new System.EventHandler(this.btnEUEliminar_Click);
             // 
             // label24
             // 
@@ -773,7 +818,7 @@
             // 
             // btnEUBuscar
             // 
-            this.btnEUBuscar.Location = new System.Drawing.Point(402, 10);
+            this.btnEUBuscar.Location = new System.Drawing.Point(419, 8);
             this.btnEUBuscar.Name = "btnEUBuscar";
             this.btnEUBuscar.Size = new System.Drawing.Size(48, 23);
             this.btnEUBuscar.TabIndex = 36;
@@ -786,50 +831,6 @@
             this.txtEUBuscarU.Name = "txtEUBuscarU";
             this.txtEUBuscarU.Size = new System.Drawing.Size(382, 20);
             this.txtEUBuscarU.TabIndex = 35;
-            // 
-            // rbNUActivo
-            // 
-            this.rbNUActivo.AutoSize = true;
-            this.rbNUActivo.Location = new System.Drawing.Point(97, 311);
-            this.rbNUActivo.Name = "rbNUActivo";
-            this.rbNUActivo.Size = new System.Drawing.Size(55, 17);
-            this.rbNUActivo.TabIndex = 44;
-            this.rbNUActivo.TabStop = true;
-            this.rbNUActivo.Text = "Activo";
-            this.rbNUActivo.UseVisualStyleBackColor = true;
-            // 
-            // rbNUInactivo
-            // 
-            this.rbNUInactivo.AutoSize = true;
-            this.rbNUInactivo.Location = new System.Drawing.Point(158, 311);
-            this.rbNUInactivo.Name = "rbNUInactivo";
-            this.rbNUInactivo.Size = new System.Drawing.Size(63, 17);
-            this.rbNUInactivo.TabIndex = 45;
-            this.rbNUInactivo.TabStop = true;
-            this.rbNUInactivo.Text = "Inactivo";
-            this.rbNUInactivo.UseVisualStyleBackColor = true;
-            // 
-            // rbMUActivo
-            // 
-            this.rbMUActivo.AutoSize = true;
-            this.rbMUActivo.Location = new System.Drawing.Point(94, 471);
-            this.rbMUActivo.Name = "rbMUActivo";
-            this.rbMUActivo.Size = new System.Drawing.Size(55, 17);
-            this.rbMUActivo.TabIndex = 88;
-            this.rbMUActivo.TabStop = true;
-            this.rbMUActivo.Text = "Activo";
-            this.rbMUActivo.UseVisualStyleBackColor = true;
-            // 
-            // rbMUInactivo
-            // 
-            this.rbMUInactivo.AutoSize = true;
-            this.rbMUInactivo.Location = new System.Drawing.Point(155, 471);
-            this.rbMUInactivo.Name = "rbMUInactivo";
-            this.rbMUInactivo.Size = new System.Drawing.Size(63, 17);
-            this.rbMUInactivo.TabIndex = 89;
-            this.rbMUInactivo.TabStop = true;
-            this.rbMUInactivo.Text = "Inactivo";
-            this.rbMUInactivo.UseVisualStyleBackColor = true;
             // 
             // frmUserManagement
             // 

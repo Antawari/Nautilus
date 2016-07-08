@@ -30,29 +30,27 @@ namespace Nautilus
         /// Sector 2
         /// Controls and events
         /// </summary>
+
+        //initialize component
         public frmUserManagement()
         {
             InitializeComponent();
         }
-
         //when the form loads
         private void frmUserManagement_Load(object sender, EventArgs e)
         {
             habilitarNU();
         }
-
         //Click on the new user tab
         private void tabNuevoUsuario_Click(object sender, EventArgs e)
         {
             habilitarNU();
         }
-
         // click on the modify user button
         private void btnMUUsuario_Click(object sender, EventArgs e)
         {
             UpdateUser();
             FillMUUserGrid();
-
         }
         // this function fills the the fields of the delete user
         private void tabEliminarUsuario_Enter(object sender, EventArgs e)
@@ -69,28 +67,49 @@ namespace Nautilus
         {
             FillMUUserGrid();
         }
+        //click on the modify user grid
         private void lstMUSeleccionU_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             LlenadoMU();
         }
-
+        //lick on the cancel button on the new user
         private void btnNUCancelar_Click(object sender, EventArgs e)
         {
-
+            CleanGroup(gpNU);
+            txtNUUsuario.Focus();
+        }
+        private void btnMUCancelar_Click(object sender, EventArgs e)
+        {
+            CleanGroup(gpMU);
+            txtMUBuscar.Focus();
+        }
+        //New User button click
+        private void btnNUGuardar_Click_1(object sender, EventArgs e)
+        {
+            NewUser();
+        }
+        //Delete user button click
+        private void btnEUEliminar_Click(object sender, EventArgs e)
+        {
+            DeleteUser();
+        }
+        //when you click on the Delete user click
+        private void lstEUlista_Click(object sender, EventArgs e)
+        {
+            seleccionEU();
         }
         /// <summary>
         /// End of Sector 2
         /// </summary>
         /***************************************************************************************************************************/
-
-
-        /// <summary>
+       
+            /// <summary>
         /// Sector 3
         /// Functions
         /// </summary>
         /// 
-
-        //Enables the modify user part of the form
+        
+            //Enables the modify user part of the form
         private void habilitarMU()
         {
             gpMU.Enabled = true;
@@ -133,8 +152,7 @@ namespace Nautilus
                 StatusMU = "Inactivo";
             }
         }
-
-        // function that checks the mail format
+                // function that checks the mail format
         private void mailOK()
         {
             string mailCheck = txtNUMail.Text;
@@ -149,13 +167,11 @@ namespace Nautilus
                 lblMailCheck.Text = "Mail Incorrecto";
             }
         }
-
-        // Function that fills up the text fields in the modify user part of the form
+                // Function that fills up the text fields in the modify user part of the form
         private void LlenadoMU()
         {
             //Para llenar los campos a modificar, hacemos una busqueda con select.
             string id = lstMUSeleccionU.CurrentRow.Cells[0].Value.ToString();
-            //MessageBox.Show(id);
             string query = @"SELECT UserID,Pass,Nombre,ApellidoP,ApellidoM,Direccion1,Direccion2," +
 "Telefono1,Telefono2,Mail,Status,rol from usuarios WHERE idusuarios='"
 + id + "' order by Nombre; ";
@@ -192,43 +208,7 @@ namespace Nautilus
             //liberar la memoria del dataset
             ds.Dispose();
         }
-
-
-        //funcion que limpia todos los textos de modificar usuario.
-        private void LimpiarMU()
-        {
-            txtMUBuscar.Text = "";
-            txtMUUsuario.Text = "";
-            txtMUPassword.Text = "";
-            txtMUNombre.Text = "";
-            txtMUApellidoP.Text = "";
-            txtMUApellidoM.Text = "";
-            txtMUDireccion.Text = "";
-            txtMUDireccion2.Text = "";
-            txtMUTel1.Text = "";
-            txtMUTel2.Text = "";
-            txtMUMail.Text = "";
-            rbMUActivo.Checked = false;
-            rbMUInactivo.Checked = false;
-            cmbMURol.Text = "";
-        }
-
-        private void btnMUCancelar_Click(object sender, EventArgs e)
-        {
-            LimpiarMU();
-            txtMUBuscar.Focus();
-        }
-
-
-        private void btnEUEliminar_Click(object sender, EventArgs e)
-        {
-            string condicional = "idusuarios=" + EliminarID;
-            string query = QueryBuilder.DeleteSQL("usuarios", condicional);
-            DBManager.deleteSQL(query);
-        }
-
-
-
+                //Function that fills the grid on the delete user part of the form
         private void LlenadoEU()
         {
             // Construir el select inicial para llenar el grid
@@ -239,7 +219,8 @@ namespace Nautilus
             lstEUlista.DataSource = DBManager.SelectForGrid(query);
             lstEUlista.Columns[0].Visible = false;
         }
-
+        //Function that assigns the variables to the delete user
+        //its called whn the grid on the form is clicked
         private void seleccionEU()
         {
             EliminarID = lstEUlista.CurrentRow.Cells[0].Value.ToString();
@@ -248,16 +229,86 @@ namespace Nautilus
             string apellidoM = lstEUlista.CurrentRow.Cells[3].Value.ToString();
             lblEUSelected.Text = nombre + " " + apellidoP + " " + apellidoM;
         }
+                //Update user method
+        private void UpdateUser()
+        {
+            //status selector
+            StatusSelector();
+            //declaracion y llenado de variables
+            string _table = "usuarios"; //Esta tabla es estatica para la rutina
+                                        //Values Variable fill
+            string _values = "UserID='" + txtMUUsuario.Text.Trim() + "'," +
+                "Pass='" + txtMUPassword.Text + "'," +
+                "Nombre='" + txtMUNombre.Text + "'," +
+                "ApellidoP='" + txtMUApellidoP.Text + "'," +
+                "ApellidoM='" + txtMUApellidoM.Text + "'," +
+                 "Direccion1='" + txtMUDireccion.Text + "'," +
+                  "Direccion2='" + txtMUDireccion2.Text + "'," +
+                "Telefono1='" + txtMUTel1.Text + "'," +
+                "Telefono2='" + txtMUTel2.Text + "'," +
+                "Mail='" + txtMUMail.Text + "'," +
+                "Status='" + StatusMU + "'," +
+                "Rol='" + cmbMURol.Text + "' ";
 
-        private void lstEUlista_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            seleccionEU();
+
+            //llenamos la variable para extraer el id
+            string id = lstMUSeleccionU.CurrentRow.Cells[0].Value.ToString();
+            string _where = "WHERE idusuarios='" + id + "'";
+            //Sacamos la sentencia del SQL de la funcion UpdateSQl
+            string updateQuery = SQLBuilder.updateSQL(_table, _values, _where);
+
+            if (DBManager.Actualizar(updateQuery) == true)
+            {
+                MessageBox.Show("Usuario actualizado con exito");
+                CleanGroup(gpMU);
+            }
+            else
+            {
+                MessageBox.Show("Actualizacion de usuario fallida");
+            }
+
+            _values = null;
+
+            //Fin de la rutina de actualizaciones
         }
-        private void lstEUlista_CellClick(object sender, DataGridViewCellEventArgs e)
+                //habilitates the new user part of the form
+        private void habilitarNU()
         {
-            seleccionEU();
+            gpNU.Enabled = true;
+            txtNUNombre.Focus();
         }
-        private void btnNUGuardar_Click_1(object sender, EventArgs e)
+        //function that fills the user grid for the modify user part of the form.
+        private void FillMUUserGrid()
+        {
+            // Construir el select inicial para llenar el grid
+            string query = @"SELECT idusuarios as 'ID',Nombre,ApellidoP as 'Apellido Paterno', ApellidoM as 'Apellido Materno' from usuarios order by Nombre; ";
+
+            // assignation of data
+            lstMUSeleccionU.DataSource = null;
+            lstMUSeleccionU.DataSource = DBManager.SelectForGrid(query);
+            lstMUSeleccionU.Columns[0].Visible = false;
+        }
+                //function that cleans all the controls in the assigned group
+        private void CleanGroup(Control con)
+        {
+            foreach (Control c in con.Controls)
+            {
+                if (c is TextBox)
+                {
+                    ((TextBox)c).Clear();
+                }
+                if (c is RadioButton)
+                {
+                    ((RadioButton)c).Checked = false;
+                }
+                if (c is ComboBox)
+                {
+                    ((ComboBox)c).Text = "";
+                }
+            }
+        }
+        //Function that inserts new user
+        private void NewUser()
         {
             //Variables para la construccion de la sentencia
             //UserID,Password,Nombre,ApellidoP,ApellidoM,Direccion1,Direccion2,Telefono1,Telefono2,Mail,Status,Rol
@@ -289,7 +340,6 @@ namespace Nautilus
 
             //Asigancion del la variable status
             StatusSelector();
-
             rol = cmbMURol.Text;
 
             //construccion enorme del string
@@ -328,92 +378,14 @@ VALUES
                 MessageBox.Show("Hubo un error en la insercion del usuario");
             }
         }
-
-
-        //Update user method
-        private void UpdateUser()
+        //function that deletes user
+        private void DeleteUser()
         {
-            //status selector
-            StatusSelector();
-            //declaracion y llenado de variables
-            string _table = "usuarios"; //Esta tabla es estatica para la rutina
-                                        //Values Variable fill
-            string _values = "UserID='" + txtMUUsuario.Text.Trim() + "'," +
-                "Pass='" + txtMUPassword.Text + "'," +
-                "Nombre='" + txtMUNombre.Text + "'," +
-                "ApellidoP='" + txtMUApellidoP.Text + "'," +
-                "ApellidoM='" + txtMUApellidoM.Text + "'," +
-                 "Direccion1='" + txtMUDireccion.Text + "'," +
-                  "Direccion2='" + txtMUDireccion2.Text + "'," +
-                "Telefono1='" + txtMUTel1.Text + "'," +
-                "Telefono2='" + txtMUTel2.Text + "'," +
-                "Mail='" + txtMUMail.Text + "'," +
-                "Status='" + StatusMU + "'," +
-                "Rol='" + cmbMURol.Text + "' ";
-
-
-            //llenamos la variable para extraer el id
-            string id = lstMUSeleccionU.CurrentRow.Cells[0].Value.ToString();
-            string _where = "WHERE idusuarios='" + id + "'";
-            //Sacamos la sentencia del SQL de la funcion UpdateSQl
-            string updateQuery = SQLBuilder.updateSQL(_table, _values, _where);
-
-            if (DBManager.Actualizar(updateQuery) == true)
-            {
-                MessageBox.Show("Usuario actualizado con exito");
-                CleanGroup(gpMU);
-
-            }
-            else
-            {
-                MessageBox.Show("Actualizacion de usuario fallida");
-            }
-
-            _values = null;
-
-            //Fin de la rutina de actualizaciones
+            string condicional = "idusuarios=" + EliminarID;
+            string query = QueryBuilder.DeleteSQL("usuarios", condicional);
+            DBManager.deleteSQL(query);
         }
-
-
-
-        //habilitates the new user part of the form
-        private void habilitarNU()
-        {
-            gpNU.Enabled = true;
-            txtNUNombre.Focus();
-        }
-        private void FillMUUserGrid()
-        {
-            // Construir el select inicial para llenar el grid
-            string query = @"SELECT idusuarios as 'ID',Nombre,ApellidoP as 'Apellido Paterno', ApellidoM as 'Apellido Materno' from usuarios order by Nombre; ";
-
-            // assignation of data
-            lstMUSeleccionU.DataSource = null;
-            lstMUSeleccionU.DataSource = DBManager.SelectForGrid(query);
-            lstMUSeleccionU.Columns[0].Visible = false;
-        }
-
-        private void CleanGroup(Control con)
-        {
-            foreach (Control c in con.Controls)
-            {
-                if (c is TextBox)
-                {
-                    ((TextBox)c).Clear();
-                }
-                if (c is RadioButton)
-                {
-                    ((RadioButton)c).Checked = false;
-                }
-                if (c is ComboBox)
-                {
-                    ((ComboBox)c).Text = "";
-                }
-
-
-            }
-        }
-
+        //***********************************************************************************************************************************
     }
 }
 

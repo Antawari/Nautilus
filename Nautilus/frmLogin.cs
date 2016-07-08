@@ -94,14 +94,5 @@ VALUES
             this.CancelButton = btnCancel;
         }
 
-        private void txtLoginUsername_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void txtLoginPassword_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
     }
 }

@@ -86,7 +86,6 @@
             this.txtLoginUsername.Name = "txtLoginUsername";
             this.txtLoginUsername.Size = new System.Drawing.Size(314, 30);
             this.txtLoginUsername.TabIndex = 0;
-            this.txtLoginUsername.TextChanged += new System.EventHandler(this.txtLoginUsername_TextChanged);
             // 
             // txtLoginPassword
             // 
@@ -96,7 +95,6 @@
             this.txtLoginPassword.Size = new System.Drawing.Size(314, 30);
             this.txtLoginPassword.TabIndex = 1;
             this.txtLoginPassword.UseSystemPasswordChar = true;
-            this.txtLoginPassword.TextChanged += new System.EventHandler(this.txtLoginPassword_TextChanged);
             // 
             // btnLogin
             // 
