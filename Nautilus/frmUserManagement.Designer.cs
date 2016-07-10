@@ -418,9 +418,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(189, 13);
+            this.label1.Size = new System.Drawing.Size(179, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Dar de alta Usuarios para la suite TXM";
+            this.label1.Text = "Dar de alta Usuarios para el Nautilus";
             // 
             // tabModificarUsuario
             // 
@@ -839,7 +839,7 @@
             this.ClientSize = new System.Drawing.Size(504, 636);
             this.Controls.Add(this.tabUserManagement);
             this.Name = "frmUserManagement";
-            this.Text = "frmUserManagement";
+            this.Text = "Manejo de usuarios";
             this.Load += new System.EventHandler(this.frmUserManagement_Load);
             this.tabUserManagement.ResumeLayout(false);
             this.tabNuevoUsuario.ResumeLayout(false);

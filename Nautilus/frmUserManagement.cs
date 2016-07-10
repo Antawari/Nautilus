@@ -18,8 +18,13 @@ namespace Nautilus
         /// </summary>
         private static string Status;
         private static string StatusMU;
-        public string UserID;
+        private static string UserID;
         private string EliminarID;
+
+        //Variables for the Kardex Operations
+        private static string User;
+        private static string ID;
+
         /// <summary>
         /// End of Sector 1
         /// </summary>
@@ -50,6 +55,11 @@ namespace Nautilus
         private void btnMUUsuario_Click(object sender, EventArgs e)
         {
             UpdateUser();
+            string _usuario = GlobalVariables.Usuario;
+            string _description = @"El Usuario " + _usuario + " modifico al usuario con el identificador " + ID +
+                " y con el siguiente nombre " + User + ". A la FECHA/HORA" + DateTime.Now;
+            KardexInsert(_description); //HERE I GO, I THINK I SHOULD 
+
             FillMUUserGrid();
         }
         // this function fills the the fields of the delete user
@@ -87,11 +97,19 @@ namespace Nautilus
         private void btnNUGuardar_Click_1(object sender, EventArgs e)
         {
             NewUser();
+            string _usuario = GlobalVariables.Usuario;
+            string _description = @"El Usuario " + _usuario + " inserto a un nuevo usuario con el identificador " + ID +
+                " y con el siguiente nombre " + User + ". A la FECHA/HORA" + DateTime.Now;
+            KardexInsert(_description);
         }
         //Delete user button click
         private void btnEUEliminar_Click(object sender, EventArgs e)
         {
             DeleteUser();
+            string _usuario = GlobalVariables.Usuario;
+            string _description = @"El Usuario " + _usuario + " Elimino a un usuario con el identificador " + ID +
+                " y con el siguiente nombre " + User + ". A la FECHA/HORA" + DateTime.Now;
+            KardexInsert(_description);
         }
         //when you click on the Delete user click
         private void lstEUlista_Click(object sender, EventArgs e)
@@ -102,14 +120,14 @@ namespace Nautilus
         /// End of Sector 2
         /// </summary>
         /***************************************************************************************************************************/
-       
-            /// <summary>
+
+        /// <summary>
         /// Sector 3
         /// Functions
         /// </summary>
         /// 
-        
-            //Enables the modify user part of the form
+
+        //Enables the modify user part of the form
         private void habilitarMU()
         {
             gpMU.Enabled = true;
@@ -152,7 +170,7 @@ namespace Nautilus
                 StatusMU = "Inactivo";
             }
         }
-                // function that checks the mail format
+        // function that checks the mail format
         private void mailOK()
         {
             string mailCheck = txtNUMail.Text;
@@ -167,7 +185,7 @@ namespace Nautilus
                 lblMailCheck.Text = "Mail Incorrecto";
             }
         }
-                // Function that fills up the text fields in the modify user part of the form
+        // Function that fills up the text fields in the modify user part of the form
         private void LlenadoMU()
         {
             //Para llenar los campos a modificar, hacemos una busqueda con select.
@@ -208,7 +226,7 @@ namespace Nautilus
             //liberar la memoria del dataset
             ds.Dispose();
         }
-                //Function that fills the grid on the delete user part of the form
+        //Function that fills the grid on the delete user part of the form
         private void LlenadoEU()
         {
             // Construir el select inicial para llenar el grid
@@ -228,8 +246,17 @@ namespace Nautilus
             string apellidoP = lstEUlista.CurrentRow.Cells[2].Value.ToString();
             string apellidoM = lstEUlista.CurrentRow.Cells[3].Value.ToString();
             lblEUSelected.Text = nombre + " " + apellidoP + " " + apellidoM;
+            //kardex variables
+            ID = EliminarID;
+            string _nombre = nombre;
+            string _apellidoP = apellidoP;
+            string _apellidoM = apellidoM;
+            User = _nombre + " " + _apellidoP + " " + _apellidoM;
+
+
+
         }
-                //Update user method
+        //Update user method
         private void UpdateUser()
         {
             //status selector
@@ -251,11 +278,22 @@ namespace Nautilus
                 "Rol='" + cmbMURol.Text + "' ";
 
 
+
+
             //llenamos la variable para extraer el id
             string id = lstMUSeleccionU.CurrentRow.Cells[0].Value.ToString();
             string _where = "WHERE idusuarios='" + id + "'";
             //Sacamos la sentencia del SQL de la funcion UpdateSQl
             string updateQuery = SQLBuilder.updateSQL(_table, _values, _where);
+
+            //Variable fill for the kardex
+            string Nombre = txtMUNombre.Text;
+            string ApellidoP = txtMUApellidoP.Text;
+            string ApellidoM = txtMUApellidoM.Text;
+            User = Nombre + " " + ApellidoP + " " + ApellidoM;
+            ID = id;
+
+
 
             if (DBManager.Actualizar(updateQuery) == true)
             {
@@ -271,7 +309,7 @@ namespace Nautilus
 
             //Fin de la rutina de actualizaciones
         }
-                //habilitates the new user part of the form
+        //habilitates the new user part of the form
         private void habilitarNU()
         {
             gpNU.Enabled = true;
@@ -288,7 +326,7 @@ namespace Nautilus
             lstMUSeleccionU.DataSource = DBManager.SelectForGrid(query);
             lstMUSeleccionU.Columns[0].Visible = false;
         }
-                //function that cleans all the controls in the assigned group
+        //function that cleans all the controls in the assigned group
         private void CleanGroup(Control con)
         {
             foreach (Control c in con.Controls)
@@ -338,6 +376,8 @@ namespace Nautilus
             Telefono2 = txtNUTelefono2.Text;
             mail = txtNUMail.Text;
 
+            ID = userID;  //To pass to the kardex
+            User = Nombre + " " + ApellidoP + " " + ApellidoM;  //to pass to the kardex
             //Asigancion del la variable status
             StatusSelector();
             rol = cmbMURol.Text;
@@ -351,27 +391,7 @@ namespace Nautilus
 
             if (DBManager.Insertar(query) == true)
             {
-                //Kardex injection
-                //Extract the variables
-                string _username = GlobalVariables.Usuario;
-                string description = "Se efectuo una insercion de usuario en el modulo de usuarios. El usuario insertado fue: " + userID;
-                //build the SQL query
-                string kardexQuery = @"INSERT INTO naut_kardex (Kardex_Modulo,Kardex_Fecha,Kardex_Hora,Kardex_Usuario,Kardex_Descripcion) 
-VALUES 
-('User_Module',curdate(), curtime(),'" + _username + "','" + description + "')";
-                // String to write in the KARDEX file
-                string LogText = @"El usuario: " + _username + " Inserto al usuario: " + userID + "  a la fecha/hora: " + DateTime.Now;
-
-                if (KardexController.Injector(kardexQuery, LogText) == true)
-                {
-                    MessageBox.Show("Usuario insertado con exito");
-                    CleanGroup(gpNU);  //Clear the whole tab using the groupcontrol that surrounds all the controls
-                    txtNUUsuario.Focus();
-                }
-                else
-                {
-                    MessageBox.Show("Error en el kardex.");
-                }
+                MessageBox.Show("El usuario " + Nombre + " fue insertado con Exito");
             }
             else
             {
@@ -384,6 +404,27 @@ VALUES
             string condicional = "idusuarios=" + EliminarID;
             string query = QueryBuilder.DeleteSQL("usuarios", condicional);
             DBManager.deleteSQL(query);
+
+          
+
+        }
+        //Kardex handler
+        private void KardexInsert(string description)
+        {
+            //MessageBox.Show("Congratulations you are logged in");
+            string _username = GlobalVariables.Usuario;
+
+            //Add to the Kardex Routine
+            //build the SQL query
+            string query = @"INSERT INTO naut_kardex (Kardex_Modulo,Kardex_Fecha,Kardex_Hora,Kardex_Usuario,Kardex_Descripcion) 
+VALUES 
+('User-Module',curdate(), curtime(),'" + _username + "','" + description + "')";
+
+            if (KardexController.Injector(query, description) != true)
+            {
+                MessageBox.Show("Error en el kardex.");
+            }
+
         }
         //***********************************************************************************************************************************
     }
